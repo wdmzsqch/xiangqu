@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IAdminInfoDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.AdminInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="BIGINT" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="area_id" property="areaId" jdbcType="BIGINT" />
+		<result column="integral" property="integral" jdbcType="INTEGER" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_name, real_name, type, password, create_time, area_id, integral, mobile
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_admin_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_admin_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.AdminInfo">
+		insert into t_admin_info (id, user_name, real_name,
+		type, password, create_time, area_id, integral, mobile
+		)
+		values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{type,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{areaId,jdbcType=BIGINT}, #{integral,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.AdminInfo">
+		insert into t_admin_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
+			<if test="integral != null">
+				integral,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=BIGINT},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=BIGINT},
+			</if>
+			<if test="integral != null">
+				#{integral,jdbcType=INTEGER},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.AdminInfo">
+		update t_admin_info
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=BIGINT},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="areaId != null">
+				area_id = #{areaId,jdbcType=BIGINT},
+			</if>
+			<if test="integral != null">
+				integral = #{integral,jdbcType=INTEGER},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.AdminInfo">
+		update t_admin_info
+		set user_name = #{userName,jdbcType=VARCHAR},
+		real_name = #{realName,jdbcType=VARCHAR},
+		type = #{type,jdbcType=BIGINT},
+		password
+		= #{password,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		area_id = #{areaId,jdbcType=BIGINT},
+		integral = #{integral,jdbcType=INTEGER}
+		mobile = #{mobile,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- xxxxxx -->
+	<select id="getAdminByPwd" resultMap="BaseResultMap" parameterType="map">
+		select *
+		from t_admin_info
+		where user_name = #{username,jdbcType=VARCHAR} and password = #{pwd,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getAllAdmin" resultType="com.hz21city.xiangqu.pojo.AdminInfo">
+		select a.id, a.user_name as userName, a.create_time as createTime,a.real_name as realName, a.mobile, a.type,a.integral, r.role_name as roleName from t_admin_info a left join t_admin_role r on
+		a.type = r.id
+	</select>
+	
+	<select id="getAdminInfoByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from t_admin_info where user_name = #{username,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getadminListByArea" resultType="com.hz21city.xiangqu.pojo.AdminInfo" parameterType="map">
+		select a.id, a.user_name as userName, a.create_time as createTime,a.real_name as realName, a.mobile, a.type, a.integral, r.role_name as roleName from t_admin_info a left join t_admin_role r on
+		a.type = r.id where a.area_id = #{areaId} and <![CDATA[a.id <> #{id}]]>
+	</select>
+	
+	<select id="getAreaAdminByType" resultType="com.hz21city.xiangqu.pojo.AdminInfo" parameterType="java.lang.Integer">
+		select a.id, a.user_name as userName, a.create_time as createTime,a.real_name as realName, a.mobile, a.type, a.integral, r.role_name as roleName from t_admin_info a left join t_admin_role r on
+		a.type = r.id where a.type = #{type}
+	</select>
+</mapper>

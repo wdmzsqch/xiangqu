@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IEventSignDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.EventSign">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="event_id" property="eventId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="comment" property="comment" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="code_pic" property="codePic" jdbcType="VARCHAR" />
+		<result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+		<result column="is_joined" property="isJoined" jdbcType="INTEGER" />
+		<result column="join_time" property="joinTime" jdbcType="TIMESTAMP" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="pic" property="pic" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, event_id, user_id, name, gender, phone, comment, code, code_pic, sign_time, is_joined,
+		join_time, age, address, pic
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_event_sign
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="getEventSignByEventUser" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from t_event_sign
+		where event_id = #{eventId,jdbcType=BIGINT} and user_id = #{userId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_event_sign
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.EventSign">
+		insert into t_event_sign (id, event_id, user_id,
+		name, gender, phone,
+		comment, code, code_pic,
+		sign_time, is_joined, join_time, age, address, pic
+		)
+		values (#{id,jdbcType=BIGINT}, #{eventId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{comment,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+		#{codePic,jdbcType=VARCHAR},
+		#{signTime,jdbcType=TIMESTAMP}, #{isJoined,jdbcType=INTEGER}, #{joinTime,jdbcType=TIMESTAMP}
+		, #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.EventSign">
+		insert into t_event_sign
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="eventId != null">
+				event_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="comment != null">
+				comment,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="codePic != null">
+				code_pic,
+			</if>
+			<if test="signTime != null">
+				sign_time,
+			</if>
+			<if test="isJoined != null">
+				is_joined,
+			</if>
+			<if test="joinTime != null">
+				join_time,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="eventId != null">
+				#{eventId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="comment != null">
+				#{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="codePic != null">
+				#{codePic,jdbcType=VARCHAR},
+			</if>
+			<if test="signTime != null">
+				#{signTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isJoined != null">
+				#{isJoined,jdbcType=INTEGER},
+			</if>
+			<if test="joinTime != null">
+				#{joinTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=TIMESTAMP},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.EventSign">
+		update t_event_sign
+		<set>
+			<if test="eventId != null">
+				event_id = #{eventId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="comment != null">
+				comment = #{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="codePic != null">
+				code_pic = #{codePic,jdbcType=VARCHAR},
+			</if>
+			<if test="signTime != null">
+				sign_time = #{signTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isJoined != null">
+				is_joined = #{isJoined,jdbcType=INTEGER},
+			</if>
+			<if test="joinTime != null">
+				join_time = #{joinTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="age != null">
+				age = #{age,jdbcType=TIMESTAMP},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.EventSign">
+		update t_event_sign
+		set event_id = #{eventId,jdbcType=BIGINT},
+		user_id = #{userId,jdbcType=BIGINT},
+		name = #{name,jdbcType=VARCHAR},
+		gender = #{gender,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		comment = #{comment,jdbcType=VARCHAR},
+		code = #{code,jdbcType=VARCHAR},
+		code_pic = #{codePic,jdbcType=VARCHAR},
+		sign_time =
+		#{signTime,jdbcType=TIMESTAMP},
+		is_joined = #{isJoined,jdbcType=INTEGER},
+		join_time = #{joinTime,jdbcType=TIMESTAMP},
+		age = #{age,jdbcType=TIMESTAMP},
+		address = #{address,jdbcType=VARCHAR},
+		pic = #{pic,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+	<select id="getSubjectListByPage" resultMap="BaseResultMap" parameterType="map">
+		select * from t_event_sign
+		<where>
+			<if test="eventId != null">
+				and event_id = #{eventId,jdbcType=VARCHAR}
+			</if>
+			<if test="code != null and code != ''">
+				and code = #{code,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null and phone != ''">
+				and phone =#{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="searchType != null and searchType != ''">
+				<choose>
+					<when test="searchType == 1">
+						and code_pic is not null
+					</when>
+					<when test="searchType == 2">
+						and code_pic is null
+					</when>
+					<otherwise></otherwise>
+				</choose>
+			</if>
+		</where>
+		order by sign_time desc limit 10
+		offset #{page}
+	</select>
+
+	<select id="getSubjectListSize" resultType="java.lang.Integer" parameterType="map">
+		select count(id) from t_event_sign
+		<where>
+			<if test="eventId != null">
+				and event_id = #{eventId,jdbcType=VARCHAR}
+			</if>
+			<if test="code != null and code != ''">
+				and code = #{code,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null and phone != ''">
+				and phone =#{phone,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+
+
+
+
+
+	<!-- 商户端 -->
+	<select id="getSignInfoByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_event_sign
+		where code = #{code,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getEventSignCountByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from t_event_sign where code = #{code,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getEventSignCount" resultType="java.lang.Integer" parameterType="map">
+		select count(*) from t_event_sign where event_id = #{event_id}
+		<if test="isJoined != null and isJoined != ''">
+			and is_joined = #{isJoined}
+		</if>
+	</select>
+
+	<select id="getEventSignCountNotNull" resultType="java.lang.Integer" parameterType="java.lang.Long">
+		select count(*) from t_event_sign where event_id = #{event_id} and code_pic is not null
+	</select>
+
+	<select id="getEventSignCountNull" resultType="java.lang.Integer" parameterType="java.lang.Long">
+		select count(*) from t_event_sign where event_id = #{event_id} and code_pic is null
+	</select>
+	
+	<select id="getEventSignByUser" resultMap="BaseResultMap"  parameterType="java.lang.Long">
+		select * from t_event_sign where user_id = #{userid}
+	</select>
+	
+	<update id="updateCombineSign" parameterType="map">
+		update t_event_sign set user_id = #{mobileuserid} where user_id = #{combineduserid}
+	</update>
+
+</mapper>

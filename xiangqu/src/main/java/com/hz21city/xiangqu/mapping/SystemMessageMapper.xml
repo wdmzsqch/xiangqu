@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.ISystemMessageDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.SystemMessage">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.hz21city.xiangqu.pojo.SystemMessage"
+		extends="BaseResultMap">
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, title, publish_time, type
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+
+
+	<select id="getSysMessageById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select * from t_system_message
+		<where>
+			and id = #{id,jdbcType=BIGINT}
+		</where>
+	</select>
+
+	<select id="getSysMessage" resultMap="BaseResultMap"
+		parameterType="INTEGER">
+		select * from t_system_message
+		<where>
+			and type in (#{type,jdbcType=INTEGER},3)
+		</where>
+		order by publish_time desc;
+	</select>
+
+
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_system_message
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_system_message
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.SystemMessage">
+		insert into t_system_message (id, title, publish_time,
+		type, content)
+		values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
+		#{publishTime,jdbcType=TIMESTAMP},
+		#{type,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.SystemMessage">
+		insert into t_system_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="publishTime != null">
+				publish_time,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.SystemMessage">
+		update t_system_message
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hz21city.xiangqu.pojo.SystemMessage">
+		update t_system_message
+		set title = #{title,jdbcType=VARCHAR},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP},
+		type = #{type,jdbcType=INTEGER},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.SystemMessage">
+		update t_system_message
+		set title = #{title,jdbcType=VARCHAR},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP},
+		type = #{type,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getSystemMessageListByPage" resultMap="ResultMapWithBLOBs"
+		parameterType="map">
+		select * from t_system_message
+		order by publish_time desc limit 10
+		offset #{page}
+	</select>
+
+	<select id="getSystemMessageListSize" resultType="java.lang.Integer">
+		select count(id) from t_system_message
+	</select>
+	
+	<select id="getNewSysmessage" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(id) from t_system_message where 1 = 1
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ publish_time > #{start}  ]]>
+		</if>
+	</select>
+</mapper>

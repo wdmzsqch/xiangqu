@@ -1,0 +1,16 @@
+@charset "utf-8";
+body{
+	margin:0;
+}
+
+.overflowOmit{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+ul{
+	margin:0;
+}
+
+.mask{position: fixed; top: 0px; left: 0px; right: 0px;	bottom: 0px; opacity: 0.5; background: #10090d;z-index:99;}

@@ -1,0 +1,160 @@
+@charset "utf-8";
+.addresstitle{
+	height:46px;
+	line-height:46px;
+	color:#717171;
+}
+
+.addressimgdiv{
+	width:15%;
+	height:46px;
+	text-align:center;
+	float:left;
+}
+
+.addressimg{
+	width:15px;
+	position:relative;
+	top:12px;
+}
+
+.addressdiv{
+	float:left;
+	width:75%;
+	
+}
+
+.addresscontent{
+	width:100%;
+	line-height:20px;
+	font-size:13px;
+	font-family:'华文细黑';
+}
+
+.addressedit{
+	width:8%;
+	text-align:center;
+	height:46px;
+	text-align:center;
+	float:left;
+}
+
+.goodscontent{
+	width:100%;
+	line-height:14px;
+	font-size:13px;
+	font-family:'华文细黑';
+	margin-bottom:8px;
+}
+
+.goodsdetail{
+	height:auto;
+	overflow:hidden;
+	padding-top:10px;
+	padding-bottom:10px;
+	color:#717171;
+	border-bottom:1px solid rgb(219,219,219);
+}
+
+.goodsimgdiv{
+	width:25%;
+	height:60px;
+	text-align:center;
+	float:left;
+}
+
+.goodsimg{
+	width:60px;
+	height:60px;
+}
+
+.goodsdiv{
+	width:70%;
+	float:left;
+}
+
+.goodsprice{
+	font-size:15px;
+	color:#F84E4E;
+	width:25%;
+	float:left;
+}
+
+.goodsnum{
+	font-size:13px;
+	color:#717171;
+	float:left;
+}
+
+.remarkdiv{
+	border-bottom:1px solid rgb(219,219,219);
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:13px;
+	font-family:'华文细黑';
+}
+
+.remark{
+	border:1px solid #717171;
+	width:80%;
+	margin-left:10px;
+	height:58px;
+	resize: none;
+	border-radius:6px;
+}
+
+.moneydiv{
+	border-bottom:1px solid rgb(219,219,219);
+	color:#717171;
+	padding-bottom:8px;
+}
+
+.allprice{
+	font-family:'华文细黑';
+	padding-left:30px;
+	margin-top:8px;
+}
+
+.pointpay{
+	font-family:'华文细黑';
+	padding-left:30px;
+	margin-top:8px;
+}
+
+.moneypay{
+	font-family:'华文细黑';
+	padding-left:30px;
+	margin-top:8px;
+}
+
+.paytype{
+	margin-left:12%;
+	padding-top:8px;
+	font-family:'华文细黑';
+	color:#717171;
+	margin-bottom:49px;
+}
+
+.submitdiv{
+	height:48px;
+	line-height:48px;
+	position:fixed;
+	bottom:0px;
+	border-top:1px solid rgb(219,219,219);
+	width:100%;
+	background-color:#ffffff;
+}
+
+.submit{
+	width:107px;
+	height:30px;
+	margin:0 auto;
+	border:1px solid #F84E4E;
+	border-radius:4px;
+	margin-top: 8px;
+	color:#F84E4E;
+	font-family:'华文细黑';
+	font-size:13px;
+	text-align:center;
+	line-height:30px;
+}

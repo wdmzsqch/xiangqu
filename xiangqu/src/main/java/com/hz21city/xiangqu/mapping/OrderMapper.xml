@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IOrderDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.Order">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="comment" property="comment" jdbcType="VARCHAR" />
+		<result column="consignee" property="consignee" jdbcType="VARCHAR" />
+		<result column="courier_num" property="courierNum" jdbcType="VARCHAR" />
+		<result column="express" property="express" jdbcType="VARCHAR" />
+		<result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="total_price" property="totalPrice" jdbcType="REAL" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="shareuser_id" property="shareuserId" jdbcType="BIGINT" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="codepic" property="codepic" jdbcType="VARCHAR" />
+		<result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, address, comment, consignee, courier_num, express,
+		order_time, phone, state,
+		total_price, user_id, order_no,
+		pay_time,shareuser_id,code,codepic,store_id,channel_code
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_order
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_order
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.Order">
+		insert into t_order (id,
+		address, comment,
+		consignee, courier_num, express,
+		order_time, phone,
+		state,
+		total_price, user_id, order_no,
+		pay_time, channel_code)
+		values
+		(#{id,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR},
+		#{comment,jdbcType=VARCHAR},
+		#{consignee,jdbcType=VARCHAR},
+		#{courierNum,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR},
+		#{orderTime,jdbcType=TIMESTAMP},
+		#{phone,jdbcType=VARCHAR},
+		#{state,jdbcType=INTEGER},
+		#{totalPrice,jdbcType=REAL},
+		#{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR},
+		#{payTime,jdbcType=TIMESTAMP}, #{channelCode,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.Order"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into t_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="comment != null">
+				comment,
+			</if>
+			<if test="consignee != null">
+				consignee,
+			</if>
+			<if test="courierNum != null">
+				courier_num,
+			</if>
+			<if test="express != null">
+				express,
+			</if>
+			<if test="orderTime != null">
+				order_time,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="totalPrice != null">
+				total_price,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="orderNo != null">
+				order_no,
+			</if>
+			<if test="payTime != null">
+				pay_time,
+			</if>
+			<if test="shareuserId != null">
+				shareuser_id,
+			</if>
+			<if test="channelCode != null">
+				channel_code,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="comment != null">
+				#{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="consignee != null">
+				#{consignee,jdbcType=VARCHAR},
+			</if>
+			<if test="courierNum != null">
+				#{courierNum,jdbcType=VARCHAR},
+			</if>
+			<if test="express != null">
+				#{express,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				#{orderTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="totalPrice != null">
+				#{totalPrice,jdbcType=REAL},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="storeId != null">
+				#{storeId,jdbcType=BIGINT},
+			</if>
+			<if test="orderNo != null">
+				#{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				#{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="shareuserId != null">
+				#{shareuserId,jdbcType=BIGINT},
+			</if>
+			<if test="channelCode != null">
+				#{channelCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.Order">
+		update t_order
+		<set>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="comment != null">
+				comment = #{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="consignee != null">
+				consignee = #{consignee,jdbcType=VARCHAR},
+			</if>
+			<if test="courierNum != null">
+				courier_num = #{courierNum,jdbcType=VARCHAR},
+			</if>
+			<if test="express != null">
+				express = #{express,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				order_time = #{orderTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="totalPrice != null">
+				total_price = #{totalPrice,jdbcType=REAL},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="orderNo != null">
+				order_no = #{orderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="codepic != null">
+				codepic = #{codepic,jdbcType=VARCHAR},
+			</if>
+			<if test="channelCode != null">
+				channel_code = #{channelCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.Order">
+		update t_order
+		set
+		address = #{address,jdbcType=VARCHAR},
+		comment =
+		#{comment,jdbcType=VARCHAR},
+		consignee = #{consignee,jdbcType=VARCHAR},
+		courier_num = #{courierNum,jdbcType=VARCHAR},
+		express =
+		#{express,jdbcType=VARCHAR},
+		order_time =
+		#{orderTime,jdbcType=TIMESTAMP},
+		phone = #{phone,jdbcType=VARCHAR},
+		state = #{state,jdbcType=INTEGER},
+		total_price =
+		#{totalPrice,jdbcType=REAL},
+		user_id = #{userId,jdbcType=BIGINT},
+		order_no = #{orderNo,jdbcType=VARCHAR},
+		pay_time =
+		#{payTime,jdbcType=TIMESTAMP},
+		channel_code = #{channelCode,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- manage functions -->
+
+	<resultMap id="orderDetail" type="com.hz21city.xiangqu.pojo.Order">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="comment" property="comment" jdbcType="VARCHAR" />
+		<result column="consignee" property="consignee" jdbcType="VARCHAR" />
+		<result column="courier_num" property="courierNum" jdbcType="VARCHAR" />
+		<result column="express" property="express" jdbcType="VARCHAR" />
+		<result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="total_price" property="totalPrice" jdbcType="REAL" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="codepic" property="codepic" jdbcType="VARCHAR" />
+		<association property="userName" javaType="java.lang.String">
+			<result column="user_name" property="userName" />
+		</association>
+		<collection property="goodsList" ofType="com.hz21city.xiangqu.pojo.OrderGoods"
+			column="id" select="getOrderGoods">
+			<id column="id" property="id" jdbcType="BIGINT" />
+			<result column="back_money" property="backMoney" jdbcType="REAL" />
+			<result column="description" property="description" jdbcType="VARCHAR" />
+			<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+			<result column="name" property="name" jdbcType="VARCHAR" />
+			<result column="num" property="num" jdbcType="INTEGER" />
+			<result column="order_id" property="orderId" jdbcType="BIGINT" />
+			<result column="origin_price" property="originPrice" jdbcType="REAL" />
+			<result column="pic" property="pic" jdbcType="VARCHAR" />
+			<result column="price" property="price" jdbcType="REAL" />
+			<result column="property" property="property" jdbcType="VARCHAR" />
+			<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		</collection>
+	</resultMap>
+
+	<select id="getMaOrderList" resultMap="orderDetail"
+		parameterType="map">
+		select o.* ,u.user_name, g.* from t_order o left join t_user_info u on
+		o.user_id = u.id
+		left outer join t_order_goods g on o.id=g.order_id
+		<where>
+			<if test="key != null and key !='' ">
+				<choose>
+					<when test="type == 1">
+						and order_no like #{key}
+					</when>
+					<when test="type == 2">
+						and consignee like #{key}
+					</when>
+					<when test="type == 3">
+						and phone like #{key}
+					</when>
+					<when test="type == 4">
+						and u.user_name like #{key}
+					</when>
+					<otherwise>
+						<!-- do nothing -->
+					</otherwise>
+				</choose>
+			</if>
+			<if test="start!=null and start!='' ">
+<![CDATA[ and order_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+<![CDATA[ and  order_time <= #{end} ]]>
+			</if>
+		</where>
+		order by order_time desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+	</select>
+
+
+
+
+	<select id="getMaOrderListSize" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(o.id) from t_order o left join t_user_info u on o.user_id
+		= u.id
+		<where>
+			<if test="key != null and key !='' ">
+				<choose>
+					<when test="type == 1">
+						and order_no like #{key}
+					</when>
+					<when test="type == 2">
+						and consignee like #{key}
+					</when>
+					<when test="type == 3">
+						and phone like #{key}
+					</when>
+					<when test="type == 4">
+						and u.user_name like #{key}
+					</when>
+					<otherwise>
+						<!-- do nothing -->
+					</otherwise>
+				</choose>
+			</if>
+			<if test="start!=null and start!='' ">
+<![CDATA[ and order_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+<![CDATA[ and  order_time <= #{end} ]]>
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getMaOrderDetail" resultMap="orderDetail"
+		parameterType="java.lang.Long">
+		select o.* ,u.user_name, g.* from t_order o left join
+		t_user_info u on o.user_id = u.id
+		left outer join t_order_goods g on
+		o.id=g.order_id
+		where o.id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getOrderGoods" resultType="com.hz21city.xiangqu.pojo.OrderGoods"
+		parameterType="map">
+		select * from t_order_goods where order_id = #{id}
+	</select>
+
+	<select id="getOrderListByState" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_order
+		<where>
+			<if test="state!=null">
+				and state = #{state}
+			</if>
+			and user_id = #{user_id}
+		</where>
+		order by order_time desc limit #{pageSize}
+		offset #{pageIndex}
+	</select>
+
+	<select id="getStoreListByState" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_order
+		<where>
+			<if test="state!=null">
+				and state = #{state}
+			</if>
+			and store_id = #{store_id}
+		</where>
+		order by order_time desc limit #{pageSize}
+		offset #{pageIndex}
+	</select>
+
+	<select id="getOrderByOutTradeNo" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_order
+		<where>
+			and order_no = #{order_no}
+		</where>
+
+	</select>
+
+	<select id="getOrderListByUser" resultMap="orderDetail"
+		parameterType="map">
+		select o.*, u.user_name, g.* from t_order o left join t_user_info u on
+		o.user_id = u.id
+		left outer join t_order_goods g on o.id=g.order_id
+		<where>
+			and user_id = #{userId}
+			and state != 1
+		</where>
+		order by order_time desc limit 10
+		offset #{page}
+	</select>
+
+	<select id="getRecordListSize" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_order
+		<where>
+			and user_id = #{userId}
+			and state != 1
+		</where>
+	</select>
+
+	<select id="getOrderListByShopState" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_order
+		<where>
+			<if test="state!=null">
+				and state = #{state}
+			</if>
+			and store_id = #{storeId}
+		</where>
+		order by order_time desc limit #{pageSize}
+		offset #{pageIndex}
+	</select>
+
+	<!-- 商户端 -->
+	<select id="getOrderByCode" resultMap="orderDetail"
+		parameterType="java.lang.String">
+		select o.* ,u.user_name, g.* from t_order o left join
+		t_user_info u on o.user_id = u.id
+		left outer join t_order_goods g on
+		o.id=g.order_id
+		where code = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getAllOrderSize" resultType="java.lang.Integer">
+		select count(id) from
+		t_order
+	</select>
+
+	<select id="getOrderCountByState" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_order
+		<where>
+			<if test="state!=null and state != ''">
+				and state = #{state}
+			</if>
+			and user_id = #{userId}
+		</where>
+	</select>
+
+	<select id="getMaOtherOrderList" resultMap="orderDetail"
+		parameterType="map">
+		select o.* ,u.user_name, g.* from t_order o left join t_user_info u on
+		o.user_id = u.id
+		left outer join t_order_goods g on o.id=g.order_id
+		<where>
+			<if test="key != null and key !='' ">
+				<choose>
+					<when test="type == 1">
+						and order_no like #{key}
+					</when>
+					<when test="type == 2">
+						and consignee like #{key}
+					</when>
+					<when test="type == 3">
+						and phone like #{key}
+					</when>
+					<when test="type == 4">
+						and u.user_name like #{key}
+					</when>
+					<otherwise>
+						<!-- do nothing -->
+					</otherwise>
+				</choose>
+			</if>
+			<if test="channelName != null and channelName !='' ">
+				and channel_code in(select channel_code from t_channel_info where channel_name like #{channelName})
+			</if>
+			<if test="start!=null and start!='' ">
+				<![CDATA[ and order_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				<![CDATA[ and  order_time <= #{end} ]]>
+			</if>
+			<if test="storeId !=null and storeId !=''">
+				and o.store_id = #{storeId}
+			</if>
+		</where>
+		order by order_time desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+	</select>
+
+
+	<select id="getMaOtherOrderListSize" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(o.id) from t_order o left join t_user_info u on o.user_id
+		= u.id
+		<where>
+			<if test="key != null and key !='' ">
+				<choose>
+					<when test="type == 1">
+						and order_no like #{key}
+					</when>
+					<when test="type == 2">
+						and consignee like #{key}
+					</when>
+					<when test="type == 3">
+						and phone like #{key}
+					</when>
+					<when test="type == 4">
+						and u.user_name like #{key}
+					</when>
+					<otherwise>
+						<!-- do nothing -->
+					</otherwise>
+				</choose>
+			</if>
+			<if test="channelName != null and channelName !='' ">
+				and channel_code in(select channel_code from t_channel_info where channel_name like #{channelName})
+			</if>
+			<if test="start!=null and start!='' ">
+				<![CDATA[ and order_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				<![CDATA[ and  order_time <= #{end} ]]>
+			</if>
+			<if test="storeId !=null and storeId !=''">
+				and store_id = #{storeId}
+			</if>
+		</where>
+	</select>
+
+	<select id="OrderListByUser" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from t_order where user_id = #{userid}
+	</select>
+
+	<select id="OrderLsitByShareUser" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from t_order where shareuser_id = #{userid}
+	</select>
+
+	<update id="updateCreatOrder" parameterType="map">
+		update t_order set
+		user_id = #{mobileuserid} where user_id = #{combineduserid}
+	</update>
+
+	<update id="updateShareOrder" parameterType="map">
+		update t_order set
+		shareuser_id = #{mobileuserid} where shareuser_id = #{combineduserid}
+	</update>
+
+	<select id="getOrderCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select ifnull(sum(og.num),0) from t_order_goods og left
+		join t_order o on o.id = og.order_id where o.user_id =#{userid} and
+		og.goods_id = #{goodsid}
+	</select>
+
+	<select id="getCountByChannelCode" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_order where channel_code = #{channelCode} and state >= 2 and id in(select order_id from t_order_goods where goods_id = #{goodsid})
+	</select>
+
+	<select id="getChannelYesTodaySellCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_order where channel_code = #{channelCode} and state >= 2 and id in(select order_id from t_order_goods where goods_id = #{goodsid})
+			<if test="start!=null and start!='' ">
+				<![CDATA[ and order_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				<![CDATA[ and  order_time <= #{end} ]]>
+			</if> 
+	</select>
+
+</mapper>

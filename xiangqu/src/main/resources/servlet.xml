@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/jee
+	http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.1.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    ">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.hz21city.xiangqu.*" />
+
+	<mvc:annotation-driven />
+	<!-- mapping styles映射到styles文件夹 -->
+	<mvc:resources mapping="/user/**" location="/user/" />
+	<!-- mapping styles映射到styles文件夹 -->
+	<mvc:resources mapping="/shop/**" location="/shop/" />
+	<!-- mapping js映射到js文件夹 -->
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<!-- mapping imgs映射到imgs文件夹 -->
+	<mvc:resources mapping="/imgs/**" location="/imgs/" />
+	<!-- mapping css映射到css文件夹 -->
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<!-- mapping 后台管理 -->
+	<mvc:resources mapping="/manage/**" location="/manage/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/wticket/**" location="/wticket/" />
+	<mvc:resources mapping="/map/**" location="/map/" />
+	<!-- mapping 活动 -->
+	<mvc:resources mapping="/event/**" location="/timeevent/" />
+
+	<!-- <mvc:resources mapping="/admin/**" location="/admin/" /> <mvc:resources mapping="/app/**" location="/app/" /> -->
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="10485760000"></property>
+		<property name="maxInMemorySize" value="40960"></property>
+	</bean>
+	<!-- 拦截器 -->
+
+	<mvc:interceptors>
+		<!-- session超时 -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 需拦截的地址 -->
+			<mvc:mapping path="/user/*" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/login.jsp" />
+			<bean class="com.hz21city.xiangqu.controller.SessionInterceptorAction">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/index</value>
+						<value>/index.jsp</value>
+						<value>/login</value>
+						<value>/login.jsp</value>
+						<value>/register.jsp</value>
+						<value>/register</value>
+						<value>/sessionsync.jsp</value>
+						<value>/sessionsync</value>
+						<value>/wxsq</value>
+						<value>/wxpaycallback</value>
+						<value>/allicallback</value>
+						<value>/findpassword.jsp</value>
+						<value>/resetpassword</value>
+						<value>/article</value>
+						<value>/toregister</value>
+						<!-- 新年抽奖 -->
+						<value>/newyearlottery.html</value>
+						<value>/newlotteryinfo</value>
+						<value>/newlottery</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+
+		<!-- 后台session -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 需拦截的地址 -->
+			<mvc:mapping path="/manage/*" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/login.jsp" />
+			<bean class="com.hz21city.xiangqu.controller.manage.MaSessionInterceptorAction">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/login</value>
+						<value>/login.jsp</value>
+						<value>/make_action_point_map</value>
+						<value>/getmaplist</value>
+						<value>/make_mark_point_map</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+
+
+		<!-- 商户端session -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 需拦截的地址 -->
+			<mvc:mapping path="/shop/*" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/login.jsp" />
+			<bean class="com.hz21city.xiangqu.controller.shop.ShSessionInterceptorAction">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/login</value>
+						<value>/login.jsp</value>
+						<value>/index</value>
+						<value>/index.jsp</value>
+						<value>/sessionsync</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		
+		<!-- 水票session -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 需拦截的地址 -->
+			<mvc:mapping path="/wticket/*" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/login.jsp" />
+			<bean class="com.hz21city.xiangqu.controller.wticket.WUSessionInterceptorAction">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/wlogin</value>
+						<value>/login.jsp</value>
+						<value>/verification</value>
+						<value>/w_verification.jsp</value>
+						<value>/check_ticket</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		
+		<!-- 地图session -->
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 需拦截的地址 -->
+			<mvc:mapping path="/map/*" />
+			<!-- 需排除拦截的地址 -->
+			<mvc:exclude-mapping path="/login.jsp" />
+			<bean class="com.hz21city.xiangqu.controller.map.MapSessionInterceptorAction">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/mlogin</value>
+						<value>/login.jsp</value>
+						<value>/make_action_point_map</value>
+						<value>/getmaplist</value>
+						<value>/make_mark_point_map</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+
+	</mvc:interceptors>
+</beans>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IAdPointDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.AdPoint" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="plot_name" property="plotName" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="ad_point_num" property="adPointNum" jdbcType="VARCHAR" />
+    <result column="ad_area" property="adArea" jdbcType="VARCHAR" />
+    <result column="ad_source_class" property="adSourceClass" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="background" property="background" jdbcType="VARCHAR" />
+    <result column="areatype" property="areatype" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, plot_name, longitude, latitude, ad_point_num, ad_area, ad_source_class, add_time, background, areatype
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ad_point
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ad_point
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.AdPoint" >
+    insert into t_ad_point (id, plot_name, longitude, 
+      latitude, ad_point_num, ad_area, 
+      ad_source_class, add_time, background, areatype)
+    values (#{id,jdbcType=BIGINT}, #{plotName,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, 
+      #{latitude,jdbcType=DOUBLE}, #{adPointNum,jdbcType=VARCHAR}, #{adArea,jdbcType=VARCHAR}, 
+      #{adSourceClass,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{background,jdbcType=VARCHAR}, #{areatype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.AdPoint" >
+    insert into t_ad_point
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="plotName != null" >
+        plot_name,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="adPointNum != null" >
+        ad_point_num,
+      </if>
+      <if test="adArea != null" >
+        ad_area,
+      </if>
+      <if test="adSourceClass != null" >
+        ad_source_class,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="background != null" >
+        background,
+      </if>
+      <if test="areatype != null" >
+        areatype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="plotName != null" >
+        #{plotName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="adPointNum != null" >
+        #{adPointNum,jdbcType=VARCHAR},
+      </if>
+      <if test="adArea != null" >
+        #{adArea,jdbcType=VARCHAR},
+      </if>
+      <if test="adSourceClass != null" >
+        #{adSourceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="background != null" >
+        #{background,jdbcType=VARCHAR},
+      </if>
+      <if test="areatype != null" >
+        #{areatype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.AdPoint" >
+    update t_ad_point
+    <set >
+      <if test="plotName != null" >
+        plot_name = #{plotName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="adPointNum != null" >
+        ad_point_num = #{adPointNum,jdbcType=VARCHAR},
+      </if>
+      <if test="adArea != null" >
+        ad_area = #{adArea,jdbcType=VARCHAR},
+      </if>
+      <if test="adSourceClass != null" >
+        ad_source_class = #{adSourceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="background != null" >
+        background = #{background,jdbcType=VARCHAR},
+      </if>
+      <if test="areatype != null" >
+        areatype = #{areatype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.AdPoint" >
+    update t_ad_point
+    set plot_name = #{plotName,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      ad_point_num = #{adPointNum,jdbcType=VARCHAR},
+      ad_area = #{adArea,jdbcType=VARCHAR},
+      ad_source_class = #{adSourceClass,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      background = #{background,jdbcType=VARCHAR},
+      areatype = #{areatype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getAdPointListByPage" resultMap="BaseResultMap"
+	parameterType="map">
+	select * from t_ad_point
+	<where>
+		<if test="keywords!=null and keywords!='' ">
+			and plot_name like #{keywords}
+		</if>
+		<if test="SourceClass!=null and SourceClass!='' ">
+			and ad_source_class like #{SourceClass}
+		</if>
+		<if test="areaSearch!=null and areaSearch!='' ">
+			and ad_area like #{areaSearch}
+		</if>
+	</where>
+	order by add_time desc limit 40
+	offset #{page}
+</select>
+
+	<select id="getAdPointListSize" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_ad_point
+		<where>
+			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+		</where>
+	</select>
+   
+   <select id="getAdPointListByLoLa" resultMap="BaseResultMap" parameterType="map">
+   		select * from t_ad_point where <![CDATA[ longitude >= #{slongitude} ]]>  and <![CDATA[ longitude <= #{elongitude} ]]> and <![CDATA[ latitude >= #{slatitude} ]]>  and <![CDATA[ latitude <= #{elatitude} ]]>
+   			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+   		order by add_time desc limit 50
+		
+   </select>
+   
+   <select id="getAdPointListByLoLaIds" resultMap="BaseResultMap" parameterType="map">
+   		select * from t_ad_point where <![CDATA[ longitude >= #{slongitude} ]]>  and <![CDATA[ longitude <= #{elongitude} ]]> and <![CDATA[ latitude >= #{slatitude} ]]>  and <![CDATA[ latitude <= #{elatitude} ]]>
+   			<if test="ids.size() > 0 ">
+				and id in  <foreach collection="ids" item="item" index="index" 
+open="(" separator="," close=")">#{item}</foreach>
+			</if>
+   		order by add_time desc limit 50
+   </select>
+   
+   <select id="getMarkAdPointListLfive" resultMap="BaseResultMap" parameterType="map">
+   	select * from t_ad_point where id in <foreach collection="ids" item="item" index="index" 
+open="(" separator="," close=")">#{item}</foreach>
+		order by add_time desc limit 50
+   </select>
+   
+   <select id="getMapList" resultMap="BaseResultMap" parameterType="map">
+   	select * from t_ad_point where 1=1
+   			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+			order by add_time desc
+   </select>
+   
+   <select id="getMarkPointList" resultMap="BaseResultMap" parameterType="map">
+   	select * from t_ad_point where id in <foreach collection="ids" item="item" index="index" 
+open="(" separator="," close=")">#{item}</foreach>
+order by add_time desc
+   </select>
+   
+   <select id="getAdPointListByPageByArea" resultMap="BaseResultMap" parameterType="map">
+		select * from t_ad_point
+		<where>
+			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+			and areatype = #{areatype}
+		</where>
+		order by add_time desc limit 40
+		offset #{page}
+	</select>
+  
+    <select id="getAdPointListSizeByArea" resultType="java.lang.Integer" parameterType="map">
+		select count(id) from t_ad_point
+		<where>
+			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+			<if test="areatype!=null and areatype!='' ">
+				and areatype = #{areatype}
+			</if>
+		</where>
+    </select>
+    
+    <select id="getAdPointListByLoLaByArea" resultMap="BaseResultMap" parameterType="map">
+   		select * from t_ad_point where <![CDATA[ longitude >= #{slongitude} ]]>  and <![CDATA[ longitude <= #{elongitude} ]]> and <![CDATA[ latitude >= #{slatitude} ]]>  and <![CDATA[ latitude <= #{elatitude} ]]>
+   			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+			<if test="areatype!=null and areatype!='' ">
+				and areatype = #{areatype}
+			</if>
+   		order by add_time desc limit 50
+		
+   </select>
+   
+   <select id="getAdPointListByLoLaIdsByArea" resultMap="BaseResultMap" parameterType="map">
+   		select * from t_ad_point where <![CDATA[ longitude >= #{slongitude} ]]>  and <![CDATA[ longitude <= #{elongitude} ]]> and <![CDATA[ latitude >= #{slatitude} ]]>  and <![CDATA[ latitude <= #{elatitude} ]]> and areatype = #{areatype}
+   			<if test="ids.size() > 0 ">
+				and id in  <foreach collection="ids" item="item" index="index" 
+				open="(" separator="," close=")">#{item}</foreach>
+			</if>
+   		order by add_time desc limit 50
+   </select>
+   
+    <select id="getMapListByArea" resultMap="BaseResultMap" parameterType="map">
+   	select * from t_ad_point where 1=1
+   			<if test="keywords!=null and keywords!='' ">
+				and plot_name like #{keywords}
+			</if>
+			<if test="SourceClass!=null and SourceClass!='' ">
+				and ad_source_class like #{SourceClass}
+			</if>
+			<if test="areaSearch!=null and areaSearch!='' ">
+				and ad_area like #{areaSearch}
+			</if>
+			 and areatype = #{areatype}
+			order by add_time desc
+   </select>
+</mapper>

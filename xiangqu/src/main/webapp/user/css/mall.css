@@ -1,0 +1,190 @@
+@charset "utf-8";
+.sorttypesearch{
+	width:100%;
+/* 	border-bottom:1px solid rgb(219,219,219); */
+	height:41px;
+	line-height: 41px;
+}
+
+.typediv{
+	margin:auto;
+	height:25px;
+	line-height:25px;
+	width:178px;
+}
+
+.typebtn{
+	float:left;
+	width:57px;
+	height: 26px;
+	line-height: 26px;
+/* 	background:#00d1bc; */
+	font-size:13px;
+	font-family:'华文细黑';
+	text-align:center;
+	color:#00d1bc;
+	border-bottom: 1px solid #00d1bc;
+}
+
+/* .typeleft{ */
+/* 	border-radius:13px 0px 0px 13px; */
+/* 	border-top: 1px solid #00d1bc; */
+/* 	border-bottom: 1px solid #00d1bc; */
+/* 	border-left: 1px solid #00d1bc; */
+/* } */
+
+/* .typeright{ */
+/* 	border-radius:0px 13px 13px 0px; */
+/* 	border-top: 1px solid #00d1bc; */
+/* 	border-bottom: 1px solid #00d1bc; */
+/* 	border-right: 1px solid #00d1bc; */
+/* } */
+
+.unusetype{
+	color:#bfbfbf;
+	border: 0px;
+}
+
+.sort{
+	float:left;
+	width:78px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-family:'华文细黑';
+/* 	color:#F84E4E; */
+	font-size:14px;
+	position:relative;
+/* 	background-image: url('../imgs/nosel.png'); */
+/* 	background-repeat: no-repeat; */
+/* 	background-position: 100%; */
+	font-weight:bold;
+	cursor:pointer;
+/* 	margin-top: 4px; */
+}
+
+.triangle-down {
+/*     width: 12px; */
+/* 	height: 9px; */
+/* 	border-left: 2.5px solid transparent; */
+/* 	border-right: 2.5px solid transparent; */
+/* 	border-top: 5px solid red; */
+/* 	position: absolute; */
+	margin-top: 10px;
+	right: 0;
+}
+
+.search{
+	width:88px;
+	margin-right:8px;
+	background-color:#e5e5e5;
+	float:right;
+	border-radius:20px;
+	height:20px;
+	line-height:20px;
+	margin-top:5px;
+	border: 0px;
+	padding: 0;
+}
+
+.typebanner{
+	scrollbar-3dlight-color:#D4D0C8; /*- 最外左 -*/ 
+	scrollbar-highlight-color:#fff; /*- 左二 -*/ 
+	scrollbar-face-color:#E4E4E4; /*- 面子 -*/ 
+	scrollbar-arrow-color:#666; /*- 箭头 -*/ 
+	scrollbar-shadow-color:#808080; /*- 右二 -*/ 
+	scrollbar-darkshadow-color:#D7DCE0; /*- 右一 -*/ 
+	scrollbar-base-color:#D7DCE0; /*- 基色 -*/ 
+	scrollbar-track-color:#;/*- 滑道 -*/ 
+	overflow:hidden;
+	display:block;
+	height:54px;
+}
+
+.typebanner ul{
+	list-style:none;
+	margin:0;
+	font-size:15px;
+	font-family:'华文细黑';
+	height:41px;
+	line-height:41px;
+	overflow: visible;
+	white-space: nowrap;
+	color:rgb(131,131,131);
+	} 
+
+.typebanner li{
+	margin-left:14px;
+	white-space: normal;
+	display: inline-block;
+	color: #bfbfbf;
+}
+
+li.select{
+/* 	border-bottom:1px solid #00d1bc; */
+	color: #00d1bc;
+}
+
+.mallgoodsimg{
+	width:100%;
+}
+
+.goodsDiv{
+	width:96%;
+	margin-left:2%;
+	margin-right:2%;
+	position:relative;
+	margin-top:10px;
+}
+
+.goodsTitle{
+	font-size:15px;
+	font-family:'华文细黑';
+	color:#717171;
+}
+
+.moneyInfo{
+	margin-top:10px;
+	font-family:'华文细黑';
+	height: 31px;
+	padding-bottom:10px;
+	line-height: 31px;
+}
+
+.price{
+	color:#F84E4E;
+	font-size:17px;
+	margin-right:9px;
+}
+
+.originPrice{
+	color:#bfbfbf;
+	font-size:14px;
+	text-decoration: line-through;
+	margin-right:15px;
+}
+
+.stock{
+	color:#bfbfbf;
+	font-size:14px;
+}
+
+.backMoneyDiv{
+	font-size:14px;
+	text-align:center;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	border-radius:10px;
+	background-color:#FFC000;
+	color:#ffffff;
+	float: right;
+	margin-right:4px;
+}
+
+.backMoney{
+	color:#FFC000;
+	font-size:17px;
+	float:right;
+	margin-right:30%;
+}

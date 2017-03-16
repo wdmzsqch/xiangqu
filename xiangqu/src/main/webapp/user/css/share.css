@@ -1,0 +1,139 @@
+@charset "utf-8";
+.typediv{
+	margin:auto;
+	height:25px;
+	line-height:25px;
+	width:178px;
+}
+
+.typebtn{
+	float:left;
+	width:88px;
+	background:rgb(248,78,78);
+	font-size:13px;
+	font-family:'华文细黑';
+	text-align:center;
+	color:#ffffff;
+}
+
+.typeleft{
+	border-radius:4px 0px 0px 4px;
+	border-top: 1px solid rgb(248,78,78);
+	border-bottom: 1px solid rgb(248,78,78);
+	border-left: 1px solid rgb(248,78,78);
+}
+
+.typeright{
+	border-radius:0px 4px 4px 0px;
+	border-top: 1px solid rgb(248,78,78);
+	border-bottom: 1px solid rgb(248,78,78);
+	border-right: 1px solid rgb(248,78,78);
+}
+
+.unusetype{
+	background:#ffffff;
+	color:rgb(248,78,78);
+}
+
+.missionDiv{
+	width:96%;
+	margin-left:2%;
+	margin-right:2%;
+	position:relative;
+	margin-top:10px;
+}
+
+.goodsDiv{
+	width:96%;
+	margin-left:2%;
+	margin-right:2%;
+	position:relative;
+	margin-top:10px;
+	border-bottom:1px solid rgb(219,219,219);
+}
+
+
+.mallgoodsimg{
+	width:100%;
+}
+
+.goodsTitle{
+	margin-top:10px;
+	margin-left:2%;
+	font-size:15px;
+	font-family:'华文细黑';
+	color:#717171;
+}
+
+.moneyInfo{
+	margin-top:10px;
+	margin-left:4%;
+	font-family:'华文细黑';
+	height: 30px;
+	line-height: 30px;
+	padding-bottom:10px;
+}
+
+.price{
+	color:#F84E4E;
+	font-size:17px;
+	margin-right:9px;
+}
+
+.originPrice{
+	color:#717171;
+	font-size:14px;
+	text-decoration: line-through;
+	margin-right:15px;
+}
+
+.stock{
+	color:#717171;
+	font-size:14px;
+}
+
+.backMoneyDiv{
+	font-size:14px;
+	text-align:center;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	border-radius:10px;
+	background-color:#FFC000;
+	color:#ffffff;
+	float: right;
+	margin-right:4px;
+	margin-top: 4px;
+}
+
+.backMoney{
+	color:#FFC000;
+	font-size:17px;
+	float:right;
+	margin-right: 10px;
+}
+
+.sharebtn{
+	max-width:195px;
+	width:89px;
+	float:right;
+	height:30px;
+	line-height:30px;
+	text-align: center;
+	background-color:#F84E4E;
+	color:#FFFFFF;
+	outline:none;
+	border: transparent;
+	border-radius:6px;	
+	font-family:'华文细黑';
+	font-size:13px;
+}
+
+.grayimage{
+	-webkit-filter: grayscale(100%); 
+	-moz-filter: grayscale(100%); 
+	-ms-filter: grayscale(100%); 
+	-o-filter: grayscale(100%); 
+	filter: grayscale(100%); 
+	filter: gray;
+}

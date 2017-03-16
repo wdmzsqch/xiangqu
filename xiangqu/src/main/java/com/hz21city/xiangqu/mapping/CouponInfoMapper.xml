@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.ICouponInfoDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.CouponInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="money_limit" property="moneyLimit" jdbcType="REAL" />
+    <result column="validity" property="validity" jdbcType="TIMESTAMP" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="num_limit" property="numLimit" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="get_num" property="getNum" jdbcType="INTEGER" />
+    <result column="use_num" property="useNum" jdbcType="INTEGER" />
+    <result column="share_income" property="shareIncome" jdbcType="INTEGER" />
+    <result column="use_income" property="useIncome" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, money, money_limit, validity, store_id, type, intro, title, num_limit, create_time, 
+    code, total, get_num, use_num, share_income, use_income
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_coupon_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_coupon_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.CouponInfo" >
+    insert into t_coupon_info (id, money, money_limit, 
+      validity, store_id, type, 
+      intro, title, num_limit, 
+      create_time, code, total, 
+      get_num, use_num, share_income, 
+      use_income)
+    values (#{id,jdbcType=BIGINT}, #{money,jdbcType=REAL}, #{moneyLimit,jdbcType=REAL}, 
+      #{validity,jdbcType=TIMESTAMP}, #{storeId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{intro,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{numLimit,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, 
+      #{getNum,jdbcType=INTEGER}, #{useNum,jdbcType=INTEGER}, #{shareIncome,jdbcType=INTEGER}, 
+      #{useIncome,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.CouponInfo" >
+    insert into t_coupon_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="moneyLimit != null" >
+        money_limit,
+      </if>
+      <if test="validity != null" >
+        validity,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="numLimit != null" >
+        num_limit,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="getNum != null" >
+        get_num,
+      </if>
+      <if test="useNum != null" >
+        use_num,
+      </if>
+      <if test="shareIncome != null" >
+        share_income,
+      </if>
+      <if test="useIncome != null" >
+        use_income,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="moneyLimit != null" >
+        #{moneyLimit,jdbcType=REAL},
+      </if>
+      <if test="validity != null" >
+        #{validity,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="numLimit != null" >
+        #{numLimit,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getNum != null" >
+        #{getNum,jdbcType=INTEGER},
+      </if>
+      <if test="useNum != null" >
+        #{useNum,jdbcType=INTEGER},
+      </if>
+      <if test="shareIncome != null" >
+        #{shareIncome,jdbcType=INTEGER},
+      </if>
+      <if test="useIncome != null" >
+        #{useIncome,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.CouponInfo" >
+    update t_coupon_info
+    <set >
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="moneyLimit != null" >
+        money_limit = #{moneyLimit,jdbcType=REAL},
+      </if>
+      <if test="validity != null" >
+        validity = #{validity,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="numLimit != null" >
+        num_limit = #{numLimit,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getNum != null" >
+        get_num = #{getNum,jdbcType=INTEGER},
+      </if>
+      <if test="useNum != null" >
+        use_num = #{useNum,jdbcType=INTEGER},
+      </if>
+      <if test="shareIncome != null" >
+        share_income = #{shareIncome,jdbcType=INTEGER},
+      </if>
+      <if test="useIncome != null" >
+        use_income = #{useIncome,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.CouponInfo" >
+    update t_coupon_info
+    set money = #{money,jdbcType=REAL},
+      money_limit = #{moneyLimit,jdbcType=REAL},
+      validity = #{validity,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      intro = #{intro,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      num_limit = #{numLimit,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
+      get_num = #{getNum,jdbcType=INTEGER},
+      use_num = #{useNum,jdbcType=INTEGER},
+      share_income = #{shareIncome,jdbcType=INTEGER},
+      use_income = #{useIncome,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getStoreIdByCoupon" resultType="java.lang.Long"  >
+    select 
+    distinct store_id
+    from t_coupon_info where date(validity) >= date(now())
+  </select>
+  
+   <select id="getCouponListByStore" resultMap="BaseResultMap"  parameterType="java.lang.Long">
+   select * from t_coupon_info where date(validity) >= date(now())
+   and store_id = #{store_id,jdbcType=BIGINT}
+   </select>
+  
+  
+  <select id="getCouponListByPage" resultMap="BaseResultMap" parameterType="map">
+  	select * from t_coupon_info 
+  	<where>
+  		<if test="keywords != null and keywords != ''">
+  			and (code like #{keywords} or title like #{keywords})
+  		</if>
+  		<if test="end!=null and end!=''">
+  			<![CDATA[ and  validity <= #{end} ]]>
+  		</if>
+  	</where>
+  	order by create_time desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+  </select>
+  
+  <select id="getMaCouponListSize" resultType="java.lang.Integer" parameterType="map">
+  	select count(*) from t_coupon_info
+  	<where>
+  		<if test="keywords != null and keywords != ''">
+  			and (code like #{keywords} or title like #{keywords})
+  		</if>
+  		<if test="end!=null and end!=''">
+  			<![CDATA[ and  validity <= #{end} ]]>
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="getCouponCountByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+  select count(*) from t_coupon_info where code = #{code,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="CouponInfoByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select * from t_coupon_info where code = #{code,jdbcType=VARCHAR}
+  </select>
+  
+     <select id="getSearchCouponListByStore" resultMap="BaseResultMap"  parameterType="map">
+   select * from t_coupon_info where date(validity) >= date(now())
+   and store_id = #{store_id,jdbcType=BIGINT}
+   		<if test="datetype != null and datetype > 0 ">
+  			<![CDATA[ and datediff(validity,now()) >= 0 and datediff(validity,now()) <= 7 ]]>
+  		</if>
+  		<if test="type!=null and type!=''">
+  			and type in (#{type})
+  		</if>
+   </select>
+  
+  <select id="getAllCouponSize" resultType="java.lang.Integer">
+  	select count(id) from t_coupon_info
+  </select>
+</mapper>

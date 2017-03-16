@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IOrderGoodsDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.OrderGoods">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="back_money" property="backMoney" jdbcType="REAL" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" jdbcType="BIGINT" />
+		<result column="origin_price" property="originPrice" jdbcType="REAL" />
+		<result column="pic" property="pic" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="REAL" />
+		<result column="property" property="property" jdbcType="VARCHAR" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="is_serve" property="isServe" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, back_money, description, goods_id, name, num, order_id,
+		origin_price, pic, price, property, store_id,is_serve
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_order_goods
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_order_goods
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.OrderGoods">
+		insert into t_order_goods (id,
+		back_money,
+		description, goods_id,
+		name, num, order_id,
+		origin_price,
+		pic, price, property,
+		store_id)
+		values (#{id,jdbcType=BIGINT},
+		#{backMoney,jdbcType=REAL},
+		#{description,jdbcType=VARCHAR},
+		#{goodsId,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR},
+		#{num,jdbcType=INTEGER},
+		#{orderId,jdbcType=BIGINT},
+		#{originPrice,jdbcType=REAL},
+		#{pic,jdbcType=BIGINT},
+		#{price,jdbcType=REAL},
+		#{property,jdbcType=VARCHAR},
+		#{storeId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.OrderGoods">
+		insert into t_order_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="backMoney != null">
+				back_money,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="originPrice != null">
+				origin_price,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="property != null">
+				property,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="isServe != null">
+				is_serve,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="backMoney != null">
+				#{backMoney,jdbcType=REAL},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=BIGINT},
+			</if>
+			<if test="originPrice != null">
+				#{originPrice,jdbcType=REAL},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=BIGINT},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=REAL},
+			</if>
+			<if test="property != null">
+				#{property,jdbcType=VARCHAR},
+			</if>
+			<if test="storeId != null">
+				#{storeId,jdbcType=BIGINT},
+			</if>
+			<if test="isServe != null">
+				#{isServe,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.OrderGoods">
+		update t_order_goods
+		<set>
+			<if test="backMoney != null">
+				back_money = #{backMoney,jdbcType=REAL},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsId != null">
+				goods_id = #{goodsId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				order_id = #{orderId,jdbcType=BIGINT},
+			</if>
+			<if test="originPrice != null">
+				origin_price = #{originPrice,jdbcType=REAL},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=BIGINT},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=REAL},
+			</if>
+			<if test="property != null">
+				property = #{property,jdbcType=VARCHAR},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.OrderGoods">
+		update
+		t_order_goods
+		set back_money = #{backMoney,jdbcType=REAL},
+		courier_num =
+		#{courierNum,jdbcType=VARCHAR},
+		description =
+		#{description,jdbcType=VARCHAR},
+		express = #{express,jdbcType=VARCHAR},
+		goods_id = #{goodsId,jdbcType=BIGINT},
+		name = #{name,jdbcType=VARCHAR},
+		num = #{num,jdbcType=INTEGER},
+		order_id = #{orderId,jdbcType=BIGINT},
+		origin_price = #{originPrice,jdbcType=REAL},
+		pic =
+		#{pic,jdbcType=BIGINT},
+		price = #{price,jdbcType=REAL},
+		property =
+		#{property,jdbcType=VARCHAR},
+		stock = #{stock,jdbcType=INTEGER},
+		store_id = #{storeId,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<select id="getOrderGoods" resultMap="BaseResultMap" parameterType="map" >
+    select  * from t_order_goods where order_id = #{id}
+  </select>
+  
+  <select id="getGoodsCount" resultType="java.lang.Integer" parameterType="java.lang.Long">
+  	select ifnull(sum(ifnull(num,0)),0) from t_order_goods where order_id = #{orderId}
+  </select>
+</mapper>

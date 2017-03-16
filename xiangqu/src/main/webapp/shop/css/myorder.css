@@ -1,0 +1,128 @@
+@charset "utf-8";
+.typebanner ul{
+	list-style:none;
+	margin:0;
+	font-size:14px;
+	font-family:'华文细黑';
+	height:28px;
+	line-height:28px;
+	overflow: visible;
+	white-space: nowrap;
+	color:rgb(131,131,131);
+	-webkit-padding-start: 0px;
+	} 
+	
+.typebanner li{
+	margin-left:25px;
+	white-space: normal;
+	display: inline-block;
+}
+
+li.select{
+	border-bottom:1px solid #E84E4D;
+	color:#323333;
+}
+body{
+	background-color:#f6f6f6;
+}
+
+.ordernumdiv{
+	line-height: 20px;
+	padding-left:17px;
+	margin-top:7px;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-right:13px;
+	height:auto;
+	overflow:hidden;
+	border-bottom:1px solid #CCCCCC;
+	background-color:#ffffff;
+}
+
+.contentdiv{
+	clear:both;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-left:17px;
+	padding-right:13px;
+	height:auto;
+	overflow:hidden;
+	border-bottom:1px solid #CCCCCC;
+	background-color:#ffffff;
+}
+
+.goodscount{
+	margin-top:8px;
+	margin-bottom:0px;
+	font-size:13px;
+	color:#979797
+}
+
+.bottomdiv{
+	height:30px;
+	line-height:30px;
+	padding-left:17px;
+	padding-right:13px;
+	background-color:#ffffff;
+}
+
+.detailbtn{
+	text-align:center;
+	font-size:13px;
+	border-radius:4px;
+	margin-top:5px;
+	width:40px;
+	float:right;
+	border:1px solid #E84E4D;
+	height:18px;
+	line-height:18px;
+	color:#E84E4D
+}
+
+.sendalert{
+	width:250px;
+	border-radius: 4px;
+	position: fixed; 
+	background-color:#ffffff;
+	font-family:'宋体';
+	z-index:100;
+	display:none;
+}
+
+.typediv{
+	padding-top:10px;
+	padding-bottom:10px;
+	margin:auto;
+	height:25px;
+	line-height:25px;
+	width:178px;
+}
+
+.typebtn{
+	float:left;
+	width:88px;
+	background:#ffffff;
+	font-size:13px;
+	font-family:'华文细黑';
+	text-align:center;
+	color:#000000;
+}
+
+.typeleft{
+	border-radius:4px 0px 0px 4px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-left: 1px solid #000000;
+}
+
+.typeright{
+	border-radius:0px 4px 4px 0px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+.unusetype{
+	background:#000000;
+	color:#ffffff;
+}

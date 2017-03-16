@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IEventInfoDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.EventInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="pic" property="pic" jdbcType="VARCHAR" />
+		<result column="del_flg" property="delFlg" jdbcType="INTEGER" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="income" property="income" jdbcType="INTEGER" />
+		<result column="signLimit" property="signLimit" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.hz21city.xiangqu.pojo.EventInfo" extends="BaseResultMap">
+		<result column="intro" property="intro" jdbcType="LONGVARCHAR" />
+		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, start_time, end_time, create_time, pic, del_flg, store_id, income, signLimit
+	</sql>
+	<sql id="Blob_Column_List">
+		intro, detail
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_event_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_event_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.EventInfo">
+		insert into t_event_info (id, name, start_time,
+		end_time, create_time, pic,
+		del_flg, store_id, income,
+		intro, detail)
+		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{pic,jdbcType=VARCHAR},
+		#{delFlg,jdbcType=INTEGER}, #{storeId,jdbcType=BIGINT}, #{income,jdbcType=INTEGER},
+		#{intro,jdbcType=LONGVARCHAR}, #{detail,jdbcType=LONGVARCHAR}), #{signLimit,jdbcType=INTEGER}
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.EventInfo">
+		insert into t_event_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+			<if test="delFlg != null">
+				del_flg,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="income != null">
+				income,
+			</if>
+			<if test="intro != null">
+				intro,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="signLimit != null">
+				signLimit,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				#{delFlg,jdbcType=INTEGER},
+			</if>
+			<if test="storeId != null">
+				#{storeId,jdbcType=BIGINT},
+			</if>
+			<if test="income != null">
+				#{income,jdbcType=INTEGER},
+			</if>
+			<if test="intro != null">
+				#{intro,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="signLimit != null">
+				#{signLimit,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.EventInfo">
+		update t_event_info
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				start_time = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				del_flg = #{delFlg,jdbcType=INTEGER},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId,jdbcType=BIGINT},
+			</if>
+			<if test="income != null">
+				income = #{income,jdbcType=INTEGER},
+			</if>
+			<if test="intro != null">
+				intro = #{intro,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="signLimit != null">
+				signLimit = #{signLimit,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hz21city.xiangqu.pojo.EventInfo">
+		update t_event_info
+		set name = #{name,jdbcType=VARCHAR},
+		start_time = #{startTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		pic = #{pic,jdbcType=VARCHAR},
+		del_flg = #{delFlg,jdbcType=INTEGER},
+		store_id = #{storeId,jdbcType=BIGINT},
+		income = #{income,jdbcType=INTEGER},
+		intro = #{intro,jdbcType=LONGVARCHAR},
+		detail = #{detail,jdbcType=LONGVARCHAR},
+		signLimit = #{signLimit,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.EventInfo">
+		update t_event_info
+		set name = #{name,jdbcType=VARCHAR},
+		start_time = #{startTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		pic = #{pic,jdbcType=VARCHAR},
+		del_flg = #{delFlg,jdbcType=INTEGER},
+		store_id = #{storeId,jdbcType=BIGINT},
+		income = #{income,jdbcType=INTEGER},
+		signLimit = #{signLimit,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+	<select id="getAllList" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_event_info
+		<where>
+			del_flg = 0
+		</where>
+		order by id desc
+	</select>
+
+	<select id="getEventListByPage" resultMap="ResultMapWithBLOBs" parameterType="map">
+		select * from t_event_info
+		<where>
+			del_flg = 0
+		</where>
+		order by id desc limit 10
+		offset #{page}
+	</select>
+
+	<select id="getUserListSize" resultType="java.lang.Integer">
+		select count(id) from t_event_info
+		<where>
+			del_flg = 0
+		</where>
+	</select>
+
+	<select id="getEventListByStoreId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+		select * from t_event_info
+		<where>
+			store_id = #{storeid}
+		</where>
+	</select>
+</mapper>

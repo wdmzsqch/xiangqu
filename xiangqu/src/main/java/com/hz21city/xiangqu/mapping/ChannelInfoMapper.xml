@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IChannelInfoDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.ChannelInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, channel_name, channel_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_channel_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_channel_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.ChannelInfo" >
+    insert into t_channel_info (id, channel_name, channel_code
+      )
+    values (#{id,jdbcType=BIGINT}, #{channelName,jdbcType=VARCHAR}, #{channelCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.ChannelInfo" >
+    insert into t_channel_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="channelCode != null" >
+        channel_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCode != null" >
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.ChannelInfo" >
+    update t_channel_info
+    <set >
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCode != null" >
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.ChannelInfo" >
+    update t_channel_info
+    set channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_code = #{channelCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getChannelListByPage" resultMap="BaseResultMap" parameterType="map">
+		select * from t_channel_info limit 10 offset #{page}
+	</select>
+
+	<select id="getChannelListSize" resultType="java.lang.Integer"	parameterType="map">
+		select count(id) from t_channel_info
+	</select>
+
+	<select id="getChannelCountCode" resultType="java.lang.Integer"	parameterType="map">
+		select count(id) from t_channel_info where channel_code = #{channelCode}
+	</select>
+	
+	 <select id="getChannelList" resultMap="BaseResultMap" parameterType="map">
+		select * from t_channel_info
+	</select>
+	
+	 <select id="getChannelInfoByCode" resultMap="BaseResultMap" parameterType="map">
+		select * from t_channel_info where channel_code = #{channelCode}
+	</select>
+</mapper>

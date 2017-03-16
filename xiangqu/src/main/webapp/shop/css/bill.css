@@ -1,0 +1,85 @@
+@CHARSET "utf-8";
+
+.shop_bills_column_w{
+	width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid #f9d3d2;
+}
+
+.shop_bills_column{
+	width: 50%;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px auto;
+    font-size: 12px;
+}
+
+.shop_bills_column_l_xz{
+	width: 49%;
+    text-align: center;
+    background: #333333;
+    border-radius: 13px 0px 0px 13px;
+    border: #333333 1px solid;
+    color: #fff;
+}
+
+.shop_bills_column_l_wxz{
+	width: 49%;
+    text-align: center;
+    background: #fff;
+    border-radius: 13px 0px 0px 13px;
+    border: #333333 1px solid;
+    color: #333333;
+}
+
+.shop_bills_column_r_xz{
+	width: 48%;
+    text-align: center;
+    background: #333333;
+    border-radius: 0px 13px 13px 0px;
+    border: #333333 1px solid;
+    color: #fff;
+}
+
+.shop_bills_column_r_wxz{
+	width: 48%;
+    text-align: center;
+    background: #fff;
+    border-radius: 0px 13px 13px 0px;
+    border: #333333 1px solid;
+    color: #333333;
+}
+
+.float_l {
+    float: left;
+}
+
+.shop_bills_time_w{
+	width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.shop_bills_time{
+	width: 40%;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px auto;
+}
+
+.shop_bills_time_l, .shop_bills_time_r{
+	float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.shop_bills_time_m{
+	float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 12px;
+}

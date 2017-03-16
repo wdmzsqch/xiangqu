@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz21city.xiangqu.dao.IShopInfoDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.ShopInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="legal" property="legal" jdbcType="VARCHAR" />
+		<result column="business_license" property="businessLicense"
+			jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="pic" property="pic" jdbcType="VARCHAR" />
+		<result column="del_flg" property="delFlg" jdbcType="INTEGER" />
+		<result column="province" property="province" jdbcType="BIGINT" />
+	    <result column="city" property="city" jdbcType="BIGINT" />
+	    <result column="area" property="area" jdbcType="BIGINT" />
+	    <result column="industry_id" property="industry_id" jdbcType="BIGINT" />
+	    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+	    <result column="client_id" property="client_id" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_name, company_name, legal, business_license,
+		address, update_time, password,
+		phone, pic, del_flg, province, city, area,industry_id,mobile,client_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_shop_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_shop_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.ShopInfo">
+		insert into t_shop_info (id,
+		user_name, company_name,
+		legal, business_license, address,
+		update_time,
+		password, phone,
+		pic, del_flg,industry_id,
+		province, city, area, mobile, client_id)
+		values (#{id,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR},
+		#{legal,jdbcType=VARCHAR}, #{businessLicense,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR}, #{delFlg,jdbcType=INTEGER},#{industry_id,jdbcType=BIGINT},
+		#{province,jdbcType=BIGINT}, #{city,jdbcType=BIGINT}, #{area,jdbcType=BIGINT}), #{mobile,jdbcType=VARCHAR},
+		#{client_id,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.ShopInfo">
+		insert into t_shop_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="companyName != null">
+				company_name,
+			</if>
+			<if test="legal != null">
+				legal,
+			</if>
+			<if test="businessLicense != null">
+				business_license,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+			<if test="delFlg != null">
+				del_flg,
+			</if>
+			<if test="province != null" >
+		        province,
+		    </if>
+		    <if test="city != null" >
+		        city,
+		    </if>
+		    <if test="area != null" >
+		        area,
+		    </if>
+		    <if test="industry_id != null" >
+		        industry_id,
+		    </if>
+		    <if test="mobile != null" >
+		        mobile,
+		    </if>
+		    <if test="client_id != null" >
+		        client_id,
+		    </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="legal != null">
+				#{legal,jdbcType=VARCHAR},
+			</if>
+			<if test="businessLicense != null">
+				#{businessLicense,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				#{delFlg,jdbcType=INTEGER},
+			</if>
+			<if test="province != null" >
+		        #{province,jdbcType=BIGINT},
+		    </if>
+		    <if test="city != null" >
+		        #{city,jdbcType=BIGINT},
+		    </if>
+		    <if test="area != null" >
+		        #{area,jdbcType=BIGINT},
+		    </if>
+		    <if test="industry_id != null" >
+		        #{industry_id,jdbcType=BIGINT},
+		    </if>
+		    <if test="mobile != null" >
+		        #{mobile,jdbcType=VARCHAR},
+		    </if>
+		    <if test="client_id != null" >
+		        #{client_id,jdbcType=VARCHAR},
+		    </if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.ShopInfo">
+		update t_shop_info
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName != null">
+				company_name = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="legal != null">
+				legal = #{legal,jdbcType=VARCHAR},
+			</if>
+			<if test="businessLicense != null">
+				business_license = #{businessLicense,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				del_flg = #{delFlg,jdbcType=INTEGER},
+			</if>
+			<if test="province != null" >
+		        province = #{province,jdbcType=BIGINT},
+		    </if>
+		    <if test="city != null" >
+		        city = #{city,jdbcType=BIGINT},
+		    </if>
+		    <if test="area != null" >
+		        area = #{area,jdbcType=BIGINT},
+		    </if>
+		    <if test="industry_id != null" >
+		        industry_id = #{industry_id,jdbcType=BIGINT},
+		    </if>
+		    <if test="mobile != null" >
+		        mobile = #{mobile,jdbcType=VARCHAR},
+		    </if>
+		    <if test="client_id != null" >
+		        client_id = #{client_id,jdbcType=VARCHAR},
+		    </if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.ShopInfo">
+		update t_shop_info
+		set user_name = #{userName,jdbcType=VARCHAR},
+		company_name =
+		#{companyName,jdbcType=VARCHAR},
+		legal = #{legal,jdbcType=VARCHAR},
+		business_license = #{businessLicense,jdbcType=VARCHAR},
+		address =
+		#{address,jdbcType=VARCHAR},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		password =
+		#{password,jdbcType=VARCHAR},
+		phone =
+		#{phone,jdbcType=VARCHAR},
+		pic =
+		#{pic,jdbcType=VARCHAR},
+		del_flg = #{delFlg,jdbcType=INTEGER},
+		province = 
+		#{province,jdbcType=BIGINT},
+		city = 
+		#{city,jdbcType=BIGINT},
+		area = 
+		#{area,jdbcType=BIGINT}
+		industry_id = 
+		#{industry_id,jdbcType=BIGINT}
+		mobile = 
+		#{mobile,jdbcType=VARCHAR}
+		client_id = 
+		#{client_id,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+
+	<!-- xxxxxx -->
+	<select id="getAllShopList" resultMap="BaseResultMap">
+		select * from t_shop_info
+		<where>
+			<![CDATA[ del_flg <>1 ]]>
+		</where>
+		order by id desc
+	</select>
+
+	<select id="getShopList" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_shop_info
+		<where>
+			<![CDATA[ del_flg <>1 ]]>
+			<if test="keywords!=null and keywords!='' ">
+				and company_name like #{keywords}
+			</if>
+			<if test="industry_id!=null">
+				and industry_id like #{industry_id}
+			</if>
+			<if test="province!=null">
+				and province like #{province}
+			</if>
+			<if test="city!=null">
+				and city like #{city}
+			</if>
+			<if test="area!=null">
+				and area like #{area}
+			</if>
+		</where>
+		order by id desc limit 10
+		offset #{page}
+	</select>
+
+	<select id="getShopListSize" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_shop_info
+		<where>
+			<![CDATA[ del_flg <>1 ]]>
+			<if test="keywords!=null and keywords!='' ">
+				and company_name like #{keywords}
+			</if>
+			<if test="industry_id!=null">
+				and industry_id like #{industry_id}
+			</if>
+			<if test="province!=null">
+				and province like #{province}
+			</if>
+			<if test="city!=null">
+				and city like #{city}
+			</if>
+			<if test="area!=null">
+				and area like #{area}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByUserName" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_shop_info
+		<where>
+			and user_name = #{username}
+		</where>
+	</select>
+
+	<update id="changePwdByShopInfo" parameterType="com.hz21city.xiangqu.pojo.ShopInfo">
+		update t_shop_info
+		<set>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAllShopSize"  resultType="java.lang.Integer">
+		select count(id) from t_shop_info where <![CDATA[ del_flg <>1 ]]>
+	</select>
+</mapper>

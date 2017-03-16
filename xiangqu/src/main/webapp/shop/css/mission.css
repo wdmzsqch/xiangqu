@@ -1,0 +1,65 @@
+@charset "utf-8";
+.typediv{
+	margin:auto;
+	height:25px;
+	line-height:25px;
+	width:178px;
+}
+
+.typebtn{
+	float:left;
+	width:88px;
+	background:#ffffff;
+	font-size:13px;
+	font-family:'华文细黑';
+	text-align:center;
+	color:rgb(102,102,102);
+}
+
+.typeleft{
+	border-radius:4px 0px 0px 4px;
+	border-top: 1px solid rgb(102,102,102);
+	border-bottom: 1px solid rgb(102,102,102);
+	border-left: 1px solid rgb(102,102,102);
+}
+
+.typeright{
+	border-radius:0px 4px 4px 0px;
+	border-top: 1px solid rgb(102,102,102);
+	border-bottom: 1px solid rgb(102,102,102);
+	border-right: 1px solid rgb(102,102,102);
+}
+
+.unusetype{
+	background:rgb(102,102,102);
+	color:#ffffff;
+}
+
+.contentdiv{
+	clear:both;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-left:17px;
+	padding-right:13px;
+	height:auto;
+	overflow:hidden;
+	border-bottom:1px solid #CCCCCC;
+	background-color:#ffffff;
+}
+
+.goodscount{
+	margin-top:3px;
+	margin-bottom:0px;
+	font-size:13px;
+	color:#979797
+}
+.detailcontent{
+	font-size:13px;
+	background-color:#ffffff;
+	padding-left:18px;
+	padding-right:18px;
+	height:18px;
+	line-height:18px;
+	border-bottom:1px solid #CCCCCC;
+	padding-top:5px;padding-bottom:5px;
+}

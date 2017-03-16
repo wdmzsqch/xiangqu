@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.ICardRecordInfoDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.CardRecordInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="card_id" property="cardId" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, card_id, address, addtime, name, phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cardrecord_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_cardrecord_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.CardRecordInfo" >
+    insert into t_cardrecord_info (id, card_id, address, 
+      addtime, name, phone
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.CardRecordInfo" >
+    insert into t_cardrecord_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.CardRecordInfo" >
+    update t_cardrecord_info
+    <set >
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.CardRecordInfo" >
+    update t_cardrecord_info
+    set card_id = #{cardId,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getCardRecordListByPage" resultMap="BaseResultMap" parameterType="map">
+		select * from t_cardrecord_info limit 10 offset #{page}
+	</select>
+
+	<select id="getCardRecordListSize" resultType="java.lang.Integer"	parameterType="map">
+		select count(id) from t_cardrecord_info
+	</select>
+</mapper>

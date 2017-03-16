@@ -1,0 +1,92 @@
+@charset "utf-8";
+.addresstitle{
+	height:46px;
+	line-height:46px;
+	border-bottom:1px solid rgb(219,219,219);
+	color:#717171;
+}
+
+.addressimg{
+	width:15px;
+	position:relative;
+	top:6px;
+}
+.addressdiv{
+	float:left;
+	width:70%;
+	
+}
+.addresscontent{
+	width:100%;
+	line-height:14px;
+	font-size:13px;
+	font-family:'华文细黑';
+	word-break: break-all;
+}
+
+.addressedit{
+	width:15%;
+	height:46px;
+	text-align:center;
+	float:left;
+}
+.addressimgdiv{
+	width:15%;
+	height:46px;
+	text-align:center;
+	float:left;
+}
+
+.username{
+	padding-left:15px;
+	height:32px;
+	line-height:32px;
+	font-size:13px;
+	font-family:'华文细黑';
+	padding-top:11px;
+	clear:both;
+}
+
+.phone{
+	padding-left:15px;
+	height:32px;
+	line-height:32px;
+	font-size:13px;
+	font-family:'华文细黑';
+	padding-top:11px;
+	clear:both;
+}
+
+input{
+	font-size:13px;
+	font-family:'华文细黑';
+	border:1px solid rgb(219,219,219);
+	height:28px;
+	line-height:28px;
+	border-radius:4px;
+	-webkit-appearance: none;
+}
+
+.submitdiv{
+	height:48px;
+	line-height:48px;
+	position:fixed;
+	bottom:0px;
+	border-top:1px solid rgb(219,219,219);
+	width:100%;
+	background-color:#ffffff;
+}
+
+.submit{
+	width:107px;
+	height:30px;
+	margin:0 auto;
+	border:1px solid #F84E4E;
+	border-radius:4px;
+	margin-top: 8px;
+	color:#F84E4E;
+	font-family:'华文细黑';
+	font-size:13px;
+	text-align:center;
+	line-height:30px;
+}

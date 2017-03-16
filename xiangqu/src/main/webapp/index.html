@@ -1,0 +1,78 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>享趣后台管理</title>
+    <link href="admin/css/admin_login.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $("#submitbtn").click(function(){
+              var hintmsg=checkUserName($("#adminname").val());
+              var loginok=false;
+              if(hintmsg!=""){
+                $("#hintmsg").text("请输入用户名。");
+                return false;
+              }
+        	  $.ajax({
+        			url : "/xiangqu/adminlogin",
+        			async : false,
+        			type : "POST",
+        			data : $("#loginform").serialize(),
+        			dataType : "json",
+        			error: function(request) {
+                        $("#hintmsg").text("登录失败");
+    			        alert("请求出错！");
+    			    },
+        			success : function(data) {
+                        try{
+                            setCookie("adminid",data.adminid,1/(24*60));
+                            setCookie("adminname",data.adminname,1/(24*60));
+                            setCookie("admintype",data.admintype,1/(24*60));
+                            setCookie("logintoken",data.logintoken,1/(24*60));
+                            loginok=true;
+                        }catch(e){
+                            $("#hintmsg").text("登录失败");
+                        }
+        			}
+        		});
+
+              if(loginok){
+                  document.location.href="/xiangqu/admin/index.html";
+              }
+              return false;
+          });
+        });
+
+    </script>
+    
+</head>
+<body>
+<div class="admin_login_wrap">
+<h1>享趣后台管理</h1>
+    <div class="adming_login_border">
+        <div class="admin_input">
+            <div style="font-color:red;" id="hintmsg"></div>
+            <form id="loginform"  method="post">
+                <ul class="admin_items">
+                    <li>
+                        <label for="user">用户名：</label>
+                        <input type="text" name="adminname" value="admin" id="adminname" size="40" class="admin_input_style" />
+                    </li>
+                    <li>
+                        <label for="pwd">密码：</label>
+                        <input type="password" name="password" value="admin" id="password" size="40" class="admin_input_style" />
+                    </li>
+                    <li>
+                    
+                          <button id="submitbtn" tabindex="3" class="btn btn-primary">提交</button>
+                        
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <p class="admin_copyright"> &copy; 2014 Powered by <a href="#" target="_blank">享趣管理后台</a></p>
+</div>
+</body>
+</html>

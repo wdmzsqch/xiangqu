@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IMarkAdPointDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.MarkAdPoint" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="point_id" property="pointId" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="areatype" property="areatype" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, point_id, add_time, areatype
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_mark_ad_point
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_mark_ad_point
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.MarkAdPoint" >
+    insert into t_mark_ad_point (id, point_id, add_time,areatype
+      )
+    values (#{id,jdbcType=BIGINT}, #{pointId,jdbcType=BIGINT}, #{addTime,jdbcType=TIMESTAMP}, #{areatype,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.MarkAdPoint" >
+    insert into t_mark_ad_point
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pointId != null" >
+        point_id,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="areatype != null" >
+        areatype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pointId != null" >
+        #{pointId,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areatype != null" >
+        #{areatype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.MarkAdPoint" >
+    update t_mark_ad_point
+    <set >
+      <if test="pointId != null" >
+        point_id = #{pointId,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areatype != null" >
+        areatype = #{areatype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.MarkAdPoint" >
+    update t_mark_ad_point
+    set point_id = #{pointId,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      areatype = #{areatype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+	<select id="getMarkAdPointBypointId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select 
+	    <include refid="Base_Column_List" />
+	    from t_mark_ad_point
+	    where point_id = #{point_id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getMarkAdPointList" resultMap="BaseResultMap" parameterType="map">
+		select * from t_mark_ad_point order by add_time desc
+	</select>
+
+	<select id="getMarkAdPointListByArea" resultMap="BaseResultMap" parameterType="map">
+		select * from t_mark_ad_point where areatype = #{areatype} order by add_time desc
+	</select>
+</mapper>

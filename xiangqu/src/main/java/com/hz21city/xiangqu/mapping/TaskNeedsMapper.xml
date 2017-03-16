@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.ITaskNeedsDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.TaskNeeds" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_phone" property="shopPhone" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shop_id, shop_name, shop_phone, intro, status, publish_time, accept_time, comment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_task_needs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_task_needs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.TaskNeeds" >
+    insert into t_task_needs (id, shop_id, shop_name, 
+      shop_phone, intro, status, 
+      publish_time, accept_time, comment
+      )
+    values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{shopName,jdbcType=VARCHAR}, 
+      #{shopPhone,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{publishTime,jdbcType=TIMESTAMP}, #{acceptTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.TaskNeeds" >
+    insert into t_task_needs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopPhone != null" >
+        shop_phone,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="acceptTime != null" >
+        accept_time,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopPhone != null" >
+        #{shopPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.TaskNeeds" >
+    update t_task_needs
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopPhone != null" >
+        shop_phone = #{shopPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.TaskNeeds" >
+    update t_task_needs
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_phone = #{shopPhone,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <select id="getTaskNeedsList" resultMap="BaseResultMap" parameterType="map">
+	select * from t_task_needs
+	<where>
+		<if test="keywords!=null and keywords!='' ">
+			and (shop_name like #{keywords} or shop_phone like #{keywords} or intro like #{keywords})
+		</if>
+		<if test="shopId != null">
+		and shop_id = #{shopId}
+		</if>
+	</where>
+	order by publish_time desc limit 10
+	offset #{page}
+  </select>
+  
+   <select id="getTaskNeedsListSize" resultType="java.lang.Integer" parameterType="map">
+	select count(id) from t_task_needs
+		<where>
+			<if test="keywords!=null and keywords!='' ">
+				and (shop_name like #{keywords} or shop_phone like #{keywords} or intro like #{keywords})
+			</if>
+			<if test="shopId != null">
+			and shop_id = #{shopId}
+			</if>
+		</where>
+  </select>
+</mapper>

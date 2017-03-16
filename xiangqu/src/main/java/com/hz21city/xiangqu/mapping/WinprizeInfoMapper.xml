@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IWinprizeInfoDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.WinprizeInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userid" property="userid" jdbcType="BIGINT" />
+    <result column="prize" property="prize" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="lotteryid" property="lotteryid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, prize, state, addtime, lotteryid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_winprize_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_winprize_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.WinprizeInfo" >
+    insert into t_winprize_info (id, userid, prize, 
+      state, addtime, lotteryid)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{prize,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}), #{lotteryid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.WinprizeInfo" >
+    insert into t_winprize_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="prize != null" >
+        prize,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="lotteryid != null" >
+        lotteryid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="prize != null" >
+        #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lotteryid != null" >
+        #{lotteryid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.WinprizeInfo" >
+    update t_winprize_info
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="prize != null" >
+        prize = #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lotteryid != null" >
+        lotteryid = #{lotteryid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.WinprizeInfo" >
+    update t_winprize_info
+    set userid = #{userid,jdbcType=BIGINT},
+      prize = #{prize,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      lotteryid = #{lotteryid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getWinprizeInfoByLottery" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_winprize_info
+    where lotteryid = #{lotteryid}
+  </select>
+  <select id="getWinprizeInfoList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_winprize_info
+    where userid = #{userid} and  <![CDATA[ prize <> '谢谢惠顾' ]]>
+    order by addtime desc
+  </select>
+  <select id="getUserPrizeListByPage" resultMap="BaseResultMap" parameterType="map" >
+    select *  from t_winprize_info
+    <where>
+  		<if test="userName != null and userName != ''">
+  			and userid in(select id from t_user_info where user_name like #{userName})
+  		</if>
+  		<if test="moblie != null and moblie != ''">
+  			and userid in(select id from t_user_info where moblie like #{moblie})
+  		</if>
+  		<if test="state!=null and state!=''">
+  			and state = #{state}
+  		</if>
+  		and  <![CDATA[ prize <> '谢谢惠顾' ]]>
+  	</where>
+  	order by addtime desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+  </select>
+  
+    <select id="getUserPrizeListSize" resultType="java.lang.Integer" parameterType="map">
+  	select count(*) from t_winprize_info
+  	<where>
+  		<if test="userName != null and userName != ''">
+  			and userid in(select id from t_user_info where user_name like #{userName})
+  		</if>
+  		<if test="moblie != null and moblie != ''">
+  			and userid in(select id from t_user_info where moblie like #{moblie})
+  		</if>
+  		<if test="state != null and state != ''">
+  			and state = #{state}
+  		</if>
+  		and  <![CDATA[ prize <> '谢谢惠顾' ]]>
+  	</where>
+  </select>
+</mapper>

@@ -1,0 +1,104 @@
+@charset "utf-8";
+.typebanner ul{
+	list-style:none;
+	margin-top:10px;
+	font-size:14px;
+	font-family:'华文细黑';
+	height:30px;
+	line-height:21px;
+	overflow: visible;
+	white-space: nowrap;
+	color:rgb(191,191,191);
+	-webkit-padding-start: 0px;
+	} 
+	
+.typebanner li{
+	margin-left:5%;
+	white-space: normal;
+	display: inline-block;
+}
+
+li.select{
+	border-bottom:1px solid RGB(0,209,188);
+	color:RGB(0,209,188);
+}
+body{
+	background-color:#f6f6f6;
+}
+
+.ordernumdiv{
+	line-height: 20px;
+	padding-left:17px;
+	margin-top:7px;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-right:13px;
+	height:auto;
+	overflow:hidden;
+	border-bottom:1px solid #CCCCCC;
+	background-color:#ffffff;
+}
+
+.contentdiv{
+	clear:both;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-left:17px;
+	padding-right:13px;
+	height:auto;
+	overflow:hidden;
+	border-bottom:1px solid #e8e8e8;
+	background-color:#ffffff;
+}
+
+.goodscount{
+	margin-top:8px;
+	margin-bottom:0px;
+	font-size:13px;
+	color:#979797
+}
+
+.bottomdiv{
+	height:30px;
+	line-height:30px;
+	padding-left:17px;
+	padding-right:13px;
+	background-color:#ffffff;
+}
+
+.detailbtn{
+	text-align:center;
+	font-size:13px;
+	border-radius:10px;
+	margin-top:5px;
+	width:40px;
+	float:right;
+	border:1px solid #E84E4D;
+	height:18px;
+	line-height:18px;
+	color:#E84E4D
+}
+
+.submitdiv{
+	height:48px;
+	line-height:48px;
+	position:fixed;
+	bottom:0px;
+	border-top:1px solid rgb(219,219,219);
+	width:100%;
+	background-color:#ffffff;
+}
+
+.submit{
+	width:107px;
+	height:30px;
+	margin:0 auto;
+	border:1px solid #F84E4E;
+	border-radius:4px;
+	margin-top: 8px;
+	color:#F84E4E;
+	font-family:'华文细黑';
+	font-size:13px;
+	text-align:center;
+	line-height:30px;
+}

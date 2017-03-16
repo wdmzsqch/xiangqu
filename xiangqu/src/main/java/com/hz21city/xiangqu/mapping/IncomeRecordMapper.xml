@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IIncomeRecordDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.IncomeRecord">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="relative_id" property="relativeId" jdbcType="BIGINT" />
+		<result column="income" property="income" jdbcType="REAL" />
+		<result column="time" property="time" jdbcType="TIMESTAMP" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="from_user_id" property="fromUserId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, type, relative_id, income, time, user_id, from_user_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_income_record
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_income_record
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.IncomeRecord">
+		insert into t_income_record
+		(id, type, relative_id,
+		income, time, user_id,
+		from_user_id)
+		values
+		(#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER},
+		#{relativeId,jdbcType=BIGINT},
+		#{income,jdbcType=REAL},
+		#{time,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
+		#{fromUserId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.IncomeRecord">
+		insert into t_income_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="relativeId != null">
+				relative_id,
+			</if>
+			<if test="income != null">
+				income,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="fromUserId != null">
+				from_user_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="relativeId != null">
+				#{relativeId,jdbcType=BIGINT},
+			</if>
+			<if test="income != null">
+				#{income,jdbcType=REAL},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="fromUserId != null">
+				#{fromUserId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.IncomeRecord">
+		update t_income_record
+		<set>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="relativeId != null">
+				relative_id = #{relativeId,jdbcType=BIGINT},
+			</if>
+			<if test="income != null">
+				income = #{income,jdbcType=REAL},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="fromUserId != null">
+				from_user_id = #{fromUserId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.IncomeRecord">
+		update
+		t_income_record
+		set type = #{type,jdbcType=INTEGER},
+		relative_id =
+		#{relativeId,jdbcType=BIGINT},
+		income = #{income,jdbcType=REAL},
+		time =
+		#{time,jdbcType=TIMESTAMP},
+		user_id = #{userId,jdbcType=BIGINT},
+		from_user_id = #{fromUserId,jdbcType=BIGINT}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- xxxxxxxxxxxxxxxxxx用户端我收益的方法xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+	<select id="getIncome" resultType="java.lang.Float"
+		parameterType="map">
+		select ifnull(sum(ifnull(income,0.0)),0.0) from t_income_record
+		<where>
+			income > 0 and type != 3
+			<if test="userid!=null">
+				and user_id= #{userid}
+			</if>
+			<if test="start!=null and start!='' ">
+				and  <![CDATA[ time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				and  <![CDATA[ time <= #{end} ]]>
+			</if>
+		</where>
+	</select>
+
+	<select id="getMissionCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(relative_id) from t_income_record
+		<where>
+			type = 1
+			<if test="userid!=null">
+				and user_id= #{userid}
+			</if>
+			<if test="start!=null and start!='' ">
+				and <![CDATA[ time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				and  <![CDATA[ time <= #{end} ]]>
+			</if>
+		</where>
+	</select>
+
+	<select id="getMissionPv" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(relative_id) from t_income_record where type = 1
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and  <![CDATA[ time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="getGoodsCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(distinct(relative_id)) from t_income_record
+		<where>
+			type = 2 and income
+			<if test="userid!=null">
+				and user_id= #{userid}
+			</if>
+			<if test="start!=null and start!='' ">
+				and <![CDATA[ time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				and  <![CDATA[time <= #{end} ]]>
+			</if>
+		</where>
+	</select>
+
+	<select id="getGoodsPurchase" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(relative_id) from t_income_record where type = 2
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and  <![CDATA[ time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="getMyBalance" resultType="java.lang.Float"
+		parameterType="map">
+		select ifnull(balance,0.0) from t_user_info where id=
+		#{userid}
+	</select>
+
+	<select id="getMission" resultType="com.hz21city.xiangqu.pojo.MissionInfo"
+		parameterType="map">
+		select * from t_mission_info where id in (select relative_id from
+		t_share_record where type = 1
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ share_time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and <![CDATA[ share_time <= #{end} ]]>
+		</if>
+		)
+	</select>
+
+	<select id="getGoods" resultType="com.hz21city.xiangqu.pojo.GoodsInfo"
+		parameterType="map">
+		select id, name, back_money as backMoney, mian_pic as mianPic
+		from
+		t_goods_info where id in (select relative_id from t_share_record where
+		type = 2
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ share_time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and <![CDATA[ share_time <= #{end} ]]>
+		</if>
+		)
+	</select>
+
+
+	<select id="incomeCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(*) from t_income_record
+		<where>
+			<if test="userid!=null">
+				and user_id= #{userid}
+			</if>
+			<if test="fromuserid!=null">
+				and from_user_id= #{fromuserid}
+			</if>
+			<if test="type!=null">
+				and type= #{type}
+			</if>
+			<if test="relativeid!=null">
+				and relative_id= #{relativeid}
+			</if>
+		</where>
+	</select>
+
+	<select id="getIncomRecordCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(*) from t_income_record where type = 1 and relative_id in
+		(select id from t_mission_info
+		<where>
+			<if test="shopId!=null">
+				and shop_id= #{shopId}
+			</if>
+			<if test="start!=null and start!='' ">
+				and <![CDATA[ publish_time >= #{start}  ]]>
+			</if>
+			<if test="end!=null and end!=''">
+				and <![CDATA[ publish_time <= #{end} ]]>
+			</if>
+			)
+		</where>
+	</select>
+
+	<select id="getShareIds" resultType="java.util.HashMap"
+		parameterType="map">
+		select distinct(relative_id) as relative_id
+		,ifnull(sum(ifnull(income,0.0)),0.0) as income from t_income_record
+		where type = #{type} and user_id = #{userid}
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and <![CDATA[ time <= #{end} ]]>
+		</if>
+		GROUP BY type,relative_id
+	</select>
+
+	<select id="getCouponShareIds" resultType="java.util.HashMap"
+		parameterType="map">
+		select distinct(relative_id) as relative_id
+		,ifnull(sum(ifnull(income,0.0)),0.0) as income from t_income_record
+		where (type = 4 or type = 5) and user_id = #{userid}
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and <![CDATA[ time <= #{end} ]]>
+		</if>
+		GROUP BY relative_id
+	</select>
+
+
+	<select id="getShIncome" resultType="java.lang.Float"
+		parameterType="map">
+		select ifnull(sum(ifnull(income,0.0)),0.0) from
+		t_income_record where type = #{type} and relative_id = #{relativeid}
+		GROUP BY type,relative_id
+	</select>
+
+	<select id="getCouponShare" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(relative_id) from t_income_record where type = 4
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and  <![CDATA[ time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="getCouponUse" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(relative_id) from t_income_record where type = 5
+		<if test="userid!=null">
+			and user_id= #{userid}
+		</if>
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and  <![CDATA[ time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="getAllRecordList" resultMap="BaseResultMap">
+		select * from t_income_record where 
+		<![CDATA[ income <> 0 and type <> 9 and type <> 10 and type <> 11 and type <> 12 and type <> 13 ]]>order
+		by time desc limit 10
+	</select>
+
+	<select id="getTodayotteryCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_income_record where type = 7 and user_id =
+		#{userid}
+		<if test="start!=null and start!='' ">
+			and <![CDATA[ time >= #{start}  ]]>
+		</if>
+		<if test="end!=null and end!=''">
+			and <![CDATA[ time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="getIncomeRecordListByUSerId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from t_income_record where user_id = #{userid}
+		order by time desc
+	</select>
+
+	<select id="getIncomeRecordListByUser" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_income_record where user_id = #{userid}
+		and type = #{type} order by time desc
+	</select>
+
+	<select id="getRecordListByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from t_income_record where user_id = #{userid}
+	</select>
+
+	<select id="getRecordListByFromUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from t_income_record where from_user_id =
+		#{userid}
+	</select>
+
+	<update id="updateCombinegetIncome" parameterType="map">
+		update
+		t_income_record set user_id = #{mobileuserid} where user_id =
+		#{combineduserid}
+	</update>
+
+	<update id="updateCombinefromIncome" parameterType="map">
+		update
+		t_income_record set from_user_id = #{mobileuserid} where from_user_id
+		= #{combineduserid}
+	</update>
+
+	<select id="getTimeIncomeCount" resultType="java.lang.Integer"
+		parameterType="map">
+		select count(id) from t_income_record where type = #{type} and user_id
+		= #{userid}
+		<if test="startTime!=null and startTime!='' ">
+			and <![CDATA[ time >= #{startTime}  ]]>
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and <![CDATA[ time <= #{endTime} ]]>
+		</if>
+	</select>
+
+	<select id="getIncomeRecordListByUserAndTime" resultMap="BaseResultMap"
+		parameterType="map">
+		select * from t_income_record where user_id = #{userid} and type =
+		#{type}
+		<if test="startTime!=null and startTime!='' ">
+			and <![CDATA[ time >= #{startTime}  ]]>
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and <![CDATA[ time <= #{endTime} ]]>
+		</if>
+		order by time desc
+	</select>
+</mapper>

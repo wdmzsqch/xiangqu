@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IUserAddressDao" >
+  <resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.UserAddress" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="BIGINT" />
+    <result column="city" property="city" jdbcType="BIGINT" />
+    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="is_defult" property="isDefult" jdbcType="INTEGER"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, address, area, city, consignee, phone, province, user_id,is_defult
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hz21city.xiangqu.pojo.UserAddress" >
+    insert into t_user_address (id, address, area, 
+      city, consignee, phone, 
+      province, user_id)
+    values (#{id,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{area,jdbcType=BIGINT}, 
+      #{city,jdbcType=BIGINT}, #{consignee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{province,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.UserAddress" >
+    insert into t_user_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="consignee != null" >
+        consignee,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+       <if test="isDefult != null" >
+        is_defult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=BIGINT},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=BIGINT},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isDefult != null" >
+        #{isDefult,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.UserAddress" >
+    update t_user_address
+    <set >
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=BIGINT},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=BIGINT},
+      </if>
+      <if test="consignee != null" >
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isDefult != null" >
+        is_defult = #{isDefult,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.UserAddress" >
+    update t_user_address
+    set address = #{address,jdbcType=VARCHAR},
+      area = #{area,jdbcType=BIGINT},
+      city = #{city,jdbcType=BIGINT},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <select id="getUserDefaultAddress" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_address
+    where user_id = #{user_id,jdbcType=BIGINT} and is_defult = 1
+  </select>
+  
+   <select id="getUserAddress" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_address
+    where user_id =  #{userId,jdbcType=BIGINT}
+  </select>
+  
+   <select id="getUserAddressList" resultMap="BaseResultMap" parameterType="map">
+	select * from t_user_address
+	<where>
+		and user_id = #{userId}
+	</where>
+	order by id desc limit 10
+	offset #{page}
+  </select>
+  
+    <select id="getUserAddressListSize" resultType="java.lang.Integer" parameterType="map">
+	select count(id) from t_user_address
+		<where>
+				and user_id = #{userId}
+		</where>
+  </select>
+  
+  <update id="updateUserAddressCombine" parameterType="map">
+  	update t_user_address set user_id = #{mobileuserid} where user_id = #{combineduserid}
+  </update>
+</mapper>

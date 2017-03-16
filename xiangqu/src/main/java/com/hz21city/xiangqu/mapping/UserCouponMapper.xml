@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IUserCouponDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.UserCoupon">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="coupon_id" property="couponId" jdbcType="BIGINT" />
+		<result column="get_time" property="getTime" jdbcType="TIMESTAMP" />
+		<result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
+		<result column="invite_user_id" property="inviteUserId" jdbcType="BIGINT" />
+		<result column="is_used" property="isUsed" jdbcType="INTEGER" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="code_pic" property="codePic" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, coupon_id, get_time, use_time, invite_user_id, is_used, code, code_pic
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_coupon
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_user_coupon
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.UserCoupon">
+		insert into t_user_coupon (id, user_id, coupon_id,
+		get_time, use_time, invite_user_id,
+		is_used, code, code_pic
+		)
+		values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT},
+		#{getTime,jdbcType=TIMESTAMP}, #{useTime,jdbcType=TIMESTAMP}, #{inviteUserId,jdbcType=BIGINT},
+		#{isUsed,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+		#{codePic,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.UserCoupon">
+		insert into t_user_coupon
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="couponId != null">
+				coupon_id,
+			</if>
+			<if test="getTime != null">
+				get_time,
+			</if>
+			<if test="useTime != null">
+				use_time,
+			</if>
+			<if test="inviteUserId != null">
+				invite_user_id,
+			</if>
+			<if test="isUsed != null">
+				is_used,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="codePic != null">
+				code_pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="couponId != null">
+				#{couponId,jdbcType=BIGINT},
+			</if>
+			<if test="getTime != null">
+				#{getTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="useTime != null">
+				#{useTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inviteUserId != null">
+				#{inviteUserId,jdbcType=BIGINT},
+			</if>
+			<if test="isUsed != null">
+				#{isUsed,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="codePic != null">
+				#{codePic,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.UserCoupon">
+		update t_user_coupon
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="couponId != null">
+				coupon_id = #{couponId,jdbcType=BIGINT},
+			</if>
+			<if test="getTime != null">
+				get_time = #{getTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="useTime != null">
+				use_time = #{useTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inviteUserId != null">
+				invite_user_id = #{inviteUserId,jdbcType=BIGINT},
+			</if>
+			<if test="isUsed != null">
+				is_used = #{isUsed,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="codePic != null">
+				code_pic = #{codePic,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.UserCoupon">
+		update t_user_coupon
+		set user_id = #{userId,jdbcType=BIGINT},
+		coupon_id = #{couponId,jdbcType=BIGINT},
+		get_time = #{getTime,jdbcType=TIMESTAMP},
+		use_time = #{useTime,jdbcType=TIMESTAMP},
+		invite_user_id = #{inviteUserId,jdbcType=BIGINT},
+		is_used = #{isUsed,jdbcType=INTEGER},
+		code = #{code,jdbcType=VARCHAR},
+		code_pic = #{codePic,jdbcType=VARCHAR}
+		where id
+		= #{id,jdbcType=BIGINT}
+	</update>
+
+	<!--ddfd -->
+	<!-- <select id="getMyCoupon" resultType="com.hz21city.xiangqu.pojo.UserCoupon" parameterType="java.lang.Long"> select *, sc.* from t_user_coupon left join (select c.id, c.validity ,c.intro, c.title, s.company_name as shop_name, s.pic as shop_pic from t_coupon_info c left join t_shop_info s on c.store_id =s.id) sc on coupon_id = sc.id where user_id = #{userid,jdbcType=BIGINT} </select> -->
+
+	<select id="getMyCoupon" resultType="com.hz21city.xiangqu.pojo.UserCoupon" parameterType="java.lang.Long">
+		select u.id, u.coupon_id, u.is_used as isUsed, c.validity ,c.intro, c.title,c.store_id as shop_id from t_user_coupon u left join t_coupon_info c on coupon_id = c.id where user_id = #{userid,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getMyCouponSearch" resultType="com.hz21city.xiangqu.pojo.UserCoupon" parameterType="map">
+		select u.id, u.coupon_id, u.is_used as isUsed, c.validity ,c.intro, c.title,c.store_id as shop_id from t_user_coupon u left join t_coupon_info c on coupon_id = c.id where user_id = #{userid,jdbcType=BIGINT}
+		<if test="datetype != null and datetype > 0 ">
+  			<![CDATA[ and datediff(c.validity,now()) >= 0 and datediff(c.validity,now()) <= 7 ]]>
+  		</if>
+  		<if test="type!=null and type!=''">
+  			and c.type in (#{type})
+  		</if>
+		<if test="shops!=null and shops!=''">
+  			and c.store_id in 
+			<foreach item="shop" index="index" collection="shops" open="(" separator="," close=")">
+			#{shop}
+			</foreach>
+  		</if>
+	</select>
+
+<!-- 	<select id="getUserCouponById" resultType="com.hz21city.xiangqu.pojo.UserCoupon" parameterType="java.lang.Long"> -->
+<!-- 		select u.*, sc.* from t_user_coupon u left join -->
+<!-- 		(select c.id, c.validity ,c.intro, c.title, s.company_name as shop_name, s.pic as shop_pic from t_coupon_info c left join t_shop_info s on c.store_id =s.id) sc -->
+<!-- 		on u.coupon_id = sc.id where u.id = #{id} -->
+<!-- 	</select> -->
+	
+	<select id="userCouponCount" resultType="java.lang.Integer" parameterType="map">
+		select count(*) from t_user_coupon where user_id =#{user_id} and coupon_id = #{coupon_id}
+	</select>
+
+	<select id="getUserCouponByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from t_user_coupon where code = #{code}
+	</select>
+
+	<select id="checkCoupon" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_coupon
+		where code = #{code,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getUserCouponListByPage" resultMap="BaseResultMap" parameterType="map">
+	select * from t_user_coupon 
+	<where>
+		<if test="couponId != null and couponId != ''">
+			and coupon_id = #{couponId} 
+		</if>
+	</where>
+	 order by get_time desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+	</select>
+	
+	<select id="getMaUserCouponListSize" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from t_user_coupon
+		<where>
+		<if test="couponId != null and couponId != ''">
+			and coupon_id = #{couponId} 
+		</if>
+	</where>
+	</select>
+
+</mapper>

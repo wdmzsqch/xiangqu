@@ -1,0 +1,80 @@
+@CHARSET "utf-8";
+
+.login_top{
+	width: 100%; 
+	height: 172px;
+	background: #00d1bc;
+	text-align: center;
+}
+
+.ellipse{
+	width: 100%;
+	height: 28px;
+	background-image: url(../imgs/ellipse_icon.png);
+	background-size: 100% 100%; 
+	background-repeat: no-repeat;
+	margin-top:-28px;
+}
+
+.content_div{
+	width: 75%; 
+	height: 39px; 
+	border: 1px solid #e3e3e3; 
+	border-radius: 20px; 
+	margin: 0 auto;
+}
+
+.bottom_submit{
+	width: 75%; 
+	height: 39px; 
+	background: #d2d2d2; 
+	color: #fff; 
+	border: 1px solid #e3e3e3; 
+	border-radius: 20px; 
+	margin: 0 auto;
+	text-align: center; 
+	line-height: 39px;
+}
+
+.content_img{
+	float: left; 
+	width: 11px; 
+	height: 16px; 
+	margin-left: 15px; 
+	margin-top: 10px;
+}
+
+.content_input{
+	line-height: 23px;
+	width: 60%; 
+	height: 23px; 
+	border: 0px; 
+	border-left: 1px solid #e3e3e3; 
+	float: left; 
+	margin-top: 7px; 
+	margin-left: 10px; 
+	padding-left: 5px; 
+	font-size: 13px;
+}
+
+.getvcode{
+	width: 19%; 
+	height: 39px; 
+	background: #00d1bc; 
+	text-align: center; 
+	line-height: 39px; 
+	color: #fff; 
+	font-size: 12px; 
+	float:left;
+	border-radius: 20px; 
+	margin-left: 3%;
+}
+
+.vcodediv{
+	width: 53%; 
+	height: 39px; 
+	border: 1px solid #e3e3e3; 
+	border-radius: 20px; 
+	margin-left: 12.5%; 
+	float:left;
+}

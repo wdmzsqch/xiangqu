@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.IUserIncomeDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.UserIncome">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="day_income" property="dayIncome" jdbcType="REAL" />
+		<result column="total_income" property="totalIncome" jdbcType="REAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, day_income, total_income
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_income
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_user_income
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.UserIncome">
+		insert into t_user_income (id, user_id, day_income,
+		total_income)
+		values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{dayIncome,jdbcType=REAL},
+		#{totalIncome,jdbcType=REAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.UserIncome">
+		insert into t_user_income
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="dayIncome != null">
+				day_income,
+			</if>
+			<if test="totalIncome != null">
+				total_income,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="dayIncome != null">
+				#{dayIncome,jdbcType=REAL},
+			</if>
+			<if test="totalIncome != null">
+				#{totalIncome,jdbcType=REAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.UserIncome">
+		update t_user_income
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="dayIncome != null">
+				day_income = #{dayIncome,jdbcType=REAL},
+			</if>
+			<if test="totalIncome != null">
+				total_income = #{totalIncome,jdbcType=REAL},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.UserIncome">
+		update t_user_income
+		set user_id = #{userId,jdbcType=BIGINT},
+		day_income = #{dayIncome,jdbcType=REAL},
+		total_income = #{totalIncome,jdbcType=REAL}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

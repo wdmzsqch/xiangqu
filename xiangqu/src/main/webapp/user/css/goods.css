@@ -1,0 +1,121 @@
+@charset "utf-8";
+
+.goodsTitle{
+	margin-top:10px;
+	margin-left:2%;
+	margin-right:2%;
+	font-size:15px;
+	font-family:'华文细黑';
+	color:#717171;
+	border-bottom: 1px solid rgb(219,219,219);
+	padding-bottom:10px;
+}
+
+.moneyInfo{
+	margin-top:10px;
+	margin-left:2%;
+	padding-left:2%;
+	margin-right:2%;
+	font-family:'华文细黑';
+	padding-bottom:10px;
+}
+
+.price{
+	color:#F84E4E;
+	font-size:17px;
+	margin-right:9px;
+}
+
+.originPrice{
+	color:#717171;
+	font-size:14px;
+	text-decoration: line-through;
+	margin-right:15px;
+}
+
+.stock{
+	color:#717171;
+	font-size:14px;
+}
+
+.backMoneyDiv{
+	font-size:14px;
+	text-align:center;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	border-radius:10px;
+	background-color:#FFC000;
+	color:#ffffff;
+	float: right;
+	margin-right:4px;
+}
+
+.backMoney{
+	color:#FFC000;
+	font-size:17px;
+	float:right;
+	margin-right:30%;
+}
+
+.btngroup{
+	width:100%;
+	height:48px;
+	line-height:48px;
+	z-index:10;
+	position:fixed;
+	bottom:0px;
+	border-top: 1px solid rgb(219,219,219);
+	background-color: #FFFFFF;
+}
+
+.buybtn{
+	max-width:150px;
+	width:40%;
+	margin-top:8px;
+	height:30px;
+	line-height:30px;
+	float:left;
+	text-align: center;
+	color:#F84E4E;
+	border:#F84E4E solid 1px;
+	background-color: #FFFFFF;
+	border-radius:6px;
+	font-family:'华文细黑';
+	font-size:13px;
+}
+
+.sharebtn{
+	max-width:195px;
+	width:52%;
+	margin-top:8px;
+	float:right;
+	height:30px;
+	line-height:30px;
+	text-align: center;
+	background-color:#F84E4E;
+	color:#FFFFFF;
+	outline:none;
+	border: transparent;
+	border-radius:6px;	
+	font-family:'华文细黑';
+	font-size:13px;
+}
+
+.provalueun{
+	color:#545454;
+	margin-right:10px;
+	min-width:50px;
+	float:left;
+	height:20px;
+	text-align:center;
+	line-height:20px;
+	border-radius:10px;
+	border:1px solid #bfbfbf;
+}
+
+.provaluecheck{
+	background-color:#ff5c4b;
+	border:1px solid #ff5c4b;
+	color:#ffffff;
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hz21city.xiangqu.dao.ICommentDao">
+	<resultMap id="BaseResultMap" type="com.hz21city.xiangqu.pojo.Comment">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="relative_id" property="relativeId" jdbcType="BIGINT" />
+		<result column="relative_type" property="relativeType" jdbcType="INTEGER" />
+		<result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.hz21city.xiangqu.pojo.Comment" extends="BaseResultMap">
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, relative_id, relative_type, publish_time
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_comment_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_comment_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.hz21city.xiangqu.pojo.Comment">
+		insert into t_comment_info (id, user_id, relative_id,
+		relative_type, publish_time, content
+		)
+		values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{relativeId,jdbcType=BIGINT},
+		#{relativeType,jdbcType=INTEGER}, #{publishTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hz21city.xiangqu.pojo.Comment">
+		insert into t_comment_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="relativeId != null">
+				relative_id,
+			</if>
+			<if test="relativeType != null">
+				relative_type,
+			</if>
+			<if test="publishTime != null">
+				publish_time,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="relativeId != null">
+				#{relativeId,jdbcType=BIGINT},
+			</if>
+			<if test="relativeType != null">
+				#{relativeType,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hz21city.xiangqu.pojo.Comment">
+		update t_comment_info
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="relativeId != null">
+				relative_id = #{relativeId,jdbcType=BIGINT},
+			</if>
+			<if test="relativeType != null">
+				relative_type = #{relativeType,jdbcType=INTEGER},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hz21city.xiangqu.pojo.Comment">
+		update t_comment_info
+		set user_id = #{userId,jdbcType=BIGINT},
+		relative_id = #{relativeId,jdbcType=BIGINT},
+		relative_type = #{relativeType,jdbcType=INTEGER},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP},
+		content = #{content,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hz21city.xiangqu.pojo.Comment">
+		update t_comment_info
+		set user_id = #{userId,jdbcType=BIGINT},
+		relative_id = #{relativeId,jdbcType=BIGINT},
+		relative_type = #{relativeType,jdbcType=INTEGER},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectCommentList" resultMap="ResultMapWithBLOBs" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_comment_info
+		where relative_id = #{relativeId,jdbcType=BIGINT} and relative_type = #{relativeType,jdbcType=INTEGER}
+		order by publish_time desc
+	</select>
+
+	<select id="getCommentPageList" resultMap="ResultMapWithBLOBs" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_comment_info
+		<where>
+			<if test="keywords != null and keywords != ''">
+				and content like #{keywords}
+			</if>
+		</where>
+		order by id desc limit 15
+		<if test="page != null">
+			offset #{page}
+		</if>
+	</select>
+
+	<select id="getCommentListCount" resultType="java.lang.Integer" parameterType="map">
+		select count(*) from t_comment_info
+		<where>
+			<if test="relativeId != null">
+				relative_id = #{relativeId,jdbcType=BIGINT} 
+			</if>
+			<if test="relativeType != null">
+				and relative_type = #{relativeType,jdbcType=INTEGER} 
+			</if>
+		</where>
+	</select>
+
+	<select id="getCommentListByuserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select * from t_comment_info where user_id = #{userId}
+	</select>
+
+	<update id="updateCombineComment" parameterType="map">
+		update t_comment_info set user_id = #{mobileuserid} where user_id = #{combineduserid}
+	</update>
+
+	<select id="getFiveCommentList" resultMap="ResultMapWithBLOBs" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_comment_info
+		where relative_id = #{relativeId,jdbcType=BIGINT} and relative_type = #{relativeType,jdbcType=INTEGER}
+		order by publish_time desc limit 5
+	</select>
+</mapper>
